@@ -1,13 +1,14 @@
 import { useI18n } from "@/lib/i18n";
 import { motion } from "framer-motion";
+import { Globe } from "lucide-react";
 
 const Navbar = () => {
   const { lang, setLang, t } = useI18n();
 
   const links = [
-    { label: t.nav.reel[lang], href: "/#reel" },
-    { label: t.nav.projects[lang], href: "/#projects" },
     { label: t.nav.about[lang], href: "/#about" },
+    { label: t.nav.projects[lang], href: "/#projects" },
+    { label: t.nav.reel[lang], href: "/#reel" },
     { label: t.nav.contact[lang], href: "/#contact" },
   ];
 
@@ -38,9 +39,10 @@ const Navbar = () => {
 
         <button
           onClick={() => setLang(lang === "es" ? "en" : "es")}
-          className="text-xs font-body tracking-widest uppercase border border-primary/40 px-3 py-1.5 rounded-sm text-primary hover:bg-primary/10 transition-colors duration-300"
+          className="flex items-center gap-1.5 text-xs font-body tracking-widest uppercase border border-primary/40 px-3 py-1.5 rounded-sm text-primary hover:bg-primary/10 transition-colors duration-300"
           aria-label="Switch language"
         >
+          <Globe className="w-3.5 h-3.5" strokeWidth={1.5} />
           {lang === "es" ? "EN" : "ES"}
         </button>
       </div>
