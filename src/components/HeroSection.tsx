@@ -1,23 +1,22 @@
 import { motion } from "framer-motion";
+import { useI18n } from "@/lib/i18n";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {
+  const { lang, t } = useI18n();
+
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden pt-16"
       aria-label="Hero"
     >
-      {/* Background image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${heroBg})` }}
       >
-        <div className="absolute inset-0 bg-background/70" />
+        <div className="absolute inset-0 bg-background/75" />
       </div>
-
-      {/* Neon glow accent */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full bg-primary/5 blur-[120px] animate-glow-pulse pointer-events-none" />
 
       <div className="relative z-10 text-center px-6">
         <motion.h1
@@ -35,7 +34,7 @@ const HeroSection = () => {
           transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
           className="mt-6 max-w-xl mx-auto text-lg sm:text-xl font-body text-muted-foreground tracking-wide"
         >
-          Filmmaker Queer. Explorando identidad y memoria.
+          {t.hero.subtitle[lang]}
         </motion.p>
 
         <motion.div
@@ -46,14 +45,13 @@ const HeroSection = () => {
         >
           <a
             href="#projects"
-            className="inline-block border border-primary/30 px-8 py-3 text-sm font-body tracking-widest uppercase text-primary hover:bg-primary/10 transition-all duration-300 neon-border-hover rounded-sm"
+            className="inline-block border border-primary/40 px-8 py-3 text-sm font-body tracking-widest uppercase text-primary hover:bg-primary/10 transition-all duration-300 accent-border-hover rounded-sm"
           >
-            Ver proyectos
+            {t.hero.cta[lang]}
           </a>
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.5 }}
