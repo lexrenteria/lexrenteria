@@ -13,9 +13,9 @@ interface SEOHeadProps {
  */
 const SEOHead = ({
   title = "Lex Rentería — Filmmaker",
-  description = "Filmmaker Queer. Explorando identidad y memoria. Director, guionista y fundador de Kauyi Media Group en Guadalajara.",
+  description = "Filmmaker Queer. Explorando identidad y memoria. Director y guionista en Guadalajara.",
   url = "https://lexrenteria.com",
-  image = "https://lexrenteria.com/og-image.jpg",
+  image = "https://image.tmdb.org/t/p/original/qQ1Ds95SE3aeeywPNznETDwTfhR.jpg",
 }: SEOHeadProps) => {
   return (
     <Helmet>
