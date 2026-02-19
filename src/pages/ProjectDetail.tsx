@@ -38,11 +38,11 @@ const ProjectDetail = () => {
     <HelmetProvider>
       <SEOHead
         title={`${project.title} — Lex Rentería`}
-        description={project.synopsis[lang]}
+        description={project.synopsis[lang].slice(0, 155)}
       />
       <Navbar />
       <main className="bg-cinematic min-h-screen pt-16">
-        {/* Hero still */}
+        {/* ── ZONE A: Hero + Title + CTA ── */}
         <div className="relative w-full aspect-video max-h-[60vh] overflow-hidden">
           <img
             src={project.still}
@@ -52,7 +52,7 @@ const ProjectDetail = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
         </div>
 
-        <div className="max-w-4xl mx-auto px-6 -mt-20 relative z-10 pb-20">
+        <div className="max-w-5xl mx-auto px-6 -mt-20 relative z-10 pb-20">
           <Link
             to="/"
             className="inline-block text-sm font-body text-muted-foreground hover:text-primary transition-colors mb-8"
@@ -81,7 +81,7 @@ const ProjectDetail = () => {
 
           {/* Watch Online CTA */}
           {project.watchUrl && (
-            <div className="mb-12">
+            <div className="mb-16">
               <a
                 href={project.watchUrl}
                 target="_blank"
@@ -99,34 +99,9 @@ const ProjectDetail = () => {
             </div>
           )}
 
-          {/* Synopsis */}
-          <div className="mb-12">
-            <h2 className="font-heading text-2xl font-bold text-foreground mb-4">
-              {t.detail.synopsis[lang]}
-            </h2>
-            <p className="text-muted-foreground font-body text-lg leading-relaxed">
-              {project.synopsis[lang]}
-            </p>
-          </div>
-
-          {/* Details table */}
-          <div className="border border-border rounded-sm overflow-hidden mb-12">
-            {details.map((d, i) => (
-              <div
-                key={d.label}
-                className={`flex justify-between px-6 py-3 text-sm font-body ${
-                  i % 2 === 0 ? "bg-card" : "bg-background"
-                }`}
-              >
-                <span className="text-muted-foreground">{d.label}</span>
-                <span className="text-foreground">{d.value}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Awards & Selections — Film Industry Laurels */}
+          {/* ── ZONE B: Awards & Laurels (Full Width) ── */}
           {project.laurels && project.laurels.length > 0 && (
-            <div className="mb-12">
+            <div className="mb-16">
               <h2 className="font-body text-xs tracking-[0.3em] uppercase text-muted-foreground mb-10 text-center">
                 {t.detail.awards[lang]}
               </h2>
@@ -147,7 +122,6 @@ const ProjectDetail = () => {
                       fill="currentColor"
                       xmlns="http://www.w3.org/2000/svg"
                     >
-                      {/* Left branch */}
                       <g opacity="0.9">
                         <ellipse cx="36" cy="165" rx="16" ry="6" transform="rotate(-10 36 165)" />
                         <ellipse cx="26" cy="143" rx="16" ry="6" transform="rotate(-22 26 143)" />
@@ -158,7 +132,6 @@ const ProjectDetail = () => {
                         <ellipse cx="62" cy="42" rx="11" ry="4.5" transform="rotate(-85 62 42)" />
                         <ellipse cx="84" cy="35" rx="10" ry="4" transform="rotate(-89 84 35)" />
                       </g>
-                      {/* Right branch */}
                       <g opacity="0.9">
                         <ellipse cx="164" cy="165" rx="16" ry="6" transform="rotate(10 164 165)" />
                         <ellipse cx="174" cy="143" rx="16" ry="6" transform="rotate(22 174 143)" />
@@ -169,11 +142,9 @@ const ProjectDetail = () => {
                         <ellipse cx="138" cy="42" rx="11" ry="4.5" transform="rotate(85 138 42)" />
                         <ellipse cx="116" cy="35" rx="10" ry="4" transform="rotate(89 116 35)" />
                       </g>
-                      {/* Bottom cross */}
                       <line x1="78" y1="185" x2="100" y2="198" stroke="currentColor" strokeWidth="2.5" />
                       <line x1="122" y1="185" x2="100" y2="198" stroke="currentColor" strokeWidth="2.5" />
                     </svg>
-                    {/* Text content — sans-serif */}
                     <div className="relative z-10 px-7 flex flex-col items-center gap-0.5">
                       <span className="font-body text-[10px] tracking-[0.25em] uppercase text-muted-foreground">
                         {lang === "es" ? "Selección Oficial" : "Official Selection"}
@@ -196,6 +167,49 @@ const ProjectDetail = () => {
             </div>
           )}
 
+          {/* ── ZONE C: Split Layout — Synopsis + Poster/Specs ── */}
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 mb-16">
+            {/* Left Column (60%) — Synopsis */}
+            <div className="lg:col-span-3">
+              <h2 className="font-heading text-2xl font-bold text-foreground mb-6">
+                {t.detail.synopsis[lang]}
+              </h2>
+              <div className="text-muted-foreground font-body text-base leading-relaxed space-y-4">
+                {project.synopsis[lang].split("\n\n").map((paragraph, i) => (
+                  <p key={i}>{paragraph}</p>
+                ))}
+              </div>
+            </div>
+
+            {/* Right Column (40%) — Poster + Tech Specs */}
+            <div className="lg:col-span-2 space-y-8">
+              {/* Official Poster */}
+              <div className="border border-border rounded-sm overflow-hidden">
+                <img
+                  src={project.poster}
+                  alt={`${project.title} poster`}
+                  className="w-full h-auto object-cover"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Tech Specs Table */}
+              <div className="border border-border rounded-sm overflow-hidden">
+                {details.map((d, i) => (
+                  <div
+                    key={d.label}
+                    className={`flex justify-between px-5 py-3 text-sm font-body ${
+                      i % 2 === 0 ? "bg-card" : "bg-background"
+                    }`}
+                  >
+                    <span className="text-muted-foreground">{d.label}</span>
+                    <span className="text-foreground text-right">{d.value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
           {/* Legacy awards fallback */}
           {project.awards && !project.laurels && (
             <div className="mb-12">
@@ -206,12 +220,11 @@ const ProjectDetail = () => {
             </div>
           )}
 
-          {/* Gallery */}
+          {/* ── ZONE D: Gallery + Related ── */}
           {project.gallery && project.gallery.length > 0 && (
             <ProjectGallery images={project.gallery} title={project.title} />
           )}
 
-          {/* Related Projects */}
           {relatedProjects.length > 0 && (
             <div className="mt-20 pt-12 border-t border-border">
               <h2 className="font-heading text-2xl font-bold text-foreground mb-8">
