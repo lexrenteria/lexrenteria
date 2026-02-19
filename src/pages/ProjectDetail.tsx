@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
+import FooterSection from "@/components/FooterSection";
 import { useI18n } from "@/lib/i18n";
 import { projects } from "@/lib/projects";
 import { motion } from "framer-motion";
@@ -18,6 +19,8 @@ const ProjectDetail = () => {
       </div>
     );
   }
+
+  const relatedProjects = projects.filter((p) => p.slug !== slug).slice(0, 3);
 
   const details = [
     { label: t.detail.type[lang], value: project.type[lang] },
@@ -64,9 +67,15 @@ const ProjectDetail = () => {
             {project.title}
           </motion.h1>
 
-          <span className="inline-block text-xs font-body tracking-widest uppercase text-primary mb-8">
-            {project.status[lang]}
-          </span>
+          {project.year === "TBA" ? (
+            <span className="inline-block text-xs font-body tracking-widest uppercase text-primary mb-8">
+              {lang === "es" ? "En desarrollo" : "In Development"}
+            </span>
+          ) : (
+            <span className="inline-block text-xs font-body tracking-widest uppercase text-muted-foreground mb-8">
+              {project.year}
+            </span>
+          )}
 
           {/* Synopsis */}
           <div className="mb-12">
@@ -115,13 +124,49 @@ const ProjectDetail = () => {
             </a>
           )}
 
-          {/* Gallery placeholder */}
-          <div className="mt-16 border border-dashed border-border rounded-sm p-12 text-center">
-            <p className="text-muted-foreground font-body text-sm tracking-wide uppercase">
-              {lang === "es" ? "Galería — próximamente" : "Gallery — coming soon"}
-            </p>
-          </div>
+          {/* Related Projects */}
+          {relatedProjects.length > 0 && (
+            <div className="mt-20 pt-12 border-t border-border">
+              <h2 className="font-heading text-2xl font-bold text-foreground mb-8">
+                {lang === "es" ? "Más Proyectos" : "More Projects"}
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {relatedProjects.map((rp) => (
+                  <Link
+                    key={rp.slug}
+                    to={`/projects/${rp.slug}`}
+                    className="group block border border-border rounded-sm overflow-hidden bg-card-gradient transition-all duration-500 accent-border-hover"
+                  >
+                    <div className="aspect-video overflow-hidden">
+                      <img
+                        src={rp.still}
+                        alt={`${rp.title} still`}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="p-4">
+                      {rp.year === "TBA" ? (
+                        <span className="inline-block text-xs font-body tracking-widest uppercase text-primary mb-1">
+                          {lang === "es" ? "En desarrollo" : "In Development"}
+                        </span>
+                      ) : (
+                        <span className="inline-block text-xs font-body tracking-widest uppercase text-muted-foreground mb-1">
+                          {rp.year}
+                        </span>
+                      )}
+                      <h3 className="font-heading text-lg font-bold text-foreground italic">
+                        {rp.title}
+                      </h3>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
+
+        <FooterSection />
       </main>
     </HelmetProvider>
   );

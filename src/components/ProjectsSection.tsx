@@ -40,24 +40,28 @@ const ProjectsSection = () => {
               className="group relative border border-border rounded-sm overflow-hidden bg-card-gradient transition-all duration-500 accent-border-hover"
             >
               <Link to={`/projects/${project.slug}`} className="block">
-                <div className="aspect-[2/3] overflow-hidden">
+                <div className="aspect-video overflow-hidden">
                   <img
-                    src={project.poster}
-                    alt={`${project.title} poster`}
+                    src={project.still}
+                    alt={`${project.title} still`}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"
                   />
                 </div>
                 <div className="p-6">
-                  <span className="inline-block text-xs font-body tracking-widest uppercase text-primary mb-2">
-                    {project.status[lang]}
-                  </span>
+                  {project.year === "TBA" ? (
+                    <span className="inline-block text-xs font-body tracking-widest uppercase text-primary mb-2">
+                      {lang === "es" ? "En desarrollo" : "In Development"}
+                    </span>
+                  ) : (
+                    <span className="inline-block text-xs font-body tracking-widest uppercase text-muted-foreground mb-2">
+                      {project.year}
+                    </span>
+                  )}
                   <h3 className="font-heading text-xl sm:text-2xl font-bold text-foreground mb-1 italic">
                     {project.title}
                   </h3>
                   <div className="flex flex-wrap gap-x-3 gap-y-1 text-sm text-muted-foreground font-body">
-                    <span>{project.year}</span>
-                    <span>·</span>
                     <span>{project.role[lang]}</span>
                     {project.festival && (
                       <>
