@@ -127,77 +127,71 @@ const ProjectDetail = () => {
           {/* Awards & Selections — Film Industry Laurels */}
           {project.laurels && project.laurels.length > 0 && (
             <div className="mb-12">
-              <h2 className="font-heading text-2xl font-bold text-foreground mb-8 text-center">
+              <h2 className="font-body text-xs tracking-[0.3em] uppercase text-muted-foreground mb-10 text-center">
                 {t.detail.awards[lang]}
               </h2>
-              <div className="flex flex-wrap justify-center gap-6">
-                {project.laurels.map((laurel, i) => {
-                  const yearMatch = laurel.text.match(/(\d{4,})/);
-                  const year = yearMatch ? yearMatch[1] : "";
-                  const festName = laurel.text.replace(/\s*\d{4,}\s*/, " ").trim();
-                  const isHighlight = laurel.highlight;
-
-                  return (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, scale: 0.85 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: i * 0.07 }}
-                      className={`relative flex flex-col items-center justify-center text-center w-[170px] h-[190px] ${
-                        isHighlight ? "text-primary" : "text-foreground"
-                      }`}
+              <div className="flex flex-wrap justify-center gap-8">
+                {project.laurels.map((laurel, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, scale: 0.85 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: i * 0.07 }}
+                    className="relative flex flex-col items-center justify-center text-center w-[180px] h-[200px]"
+                  >
+                    {/* Classic laurel wreath SVG */}
+                    <svg
+                      viewBox="0 0 200 220"
+                      className={`absolute inset-0 w-full h-full ${laurel.highlight ? "text-primary" : "text-foreground"}`}
+                      fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      {/* Laurel Wreath SVG */}
-                      <svg
-                        viewBox="0 0 200 220"
-                        className="absolute inset-0 w-full h-full"
-                        fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        {/* Left branch */}
-                        <g opacity="0.85">
-                          <ellipse cx="38" cy="160" rx="14" ry="7" transform="rotate(-15 38 160)" />
-                          <ellipse cx="28" cy="140" rx="14" ry="7" transform="rotate(-25 28 140)" />
-                          <ellipse cx="22" cy="118" rx="13" ry="7" transform="rotate(-40 22 118)" />
-                          <ellipse cx="22" cy="96" rx="12" ry="6" transform="rotate(-55 22 96)" />
-                          <ellipse cx="30" cy="76" rx="11" ry="6" transform="rotate(-65 30 76)" />
-                          <ellipse cx="44" cy="58" rx="10" ry="5.5" transform="rotate(-75 44 58)" />
-                          <ellipse cx="62" cy="46" rx="10" ry="5" transform="rotate(-82 62 46)" />
-                          <ellipse cx="82" cy="38" rx="9" ry="5" transform="rotate(-88 82 38)" />
-                        </g>
-                        {/* Right branch */}
-                        <g opacity="0.85">
-                          <ellipse cx="162" cy="160" rx="14" ry="7" transform="rotate(15 162 160)" />
-                          <ellipse cx="172" cy="140" rx="14" ry="7" transform="rotate(25 172 140)" />
-                          <ellipse cx="178" cy="118" rx="13" ry="7" transform="rotate(40 178 118)" />
-                          <ellipse cx="178" cy="96" rx="12" ry="6" transform="rotate(55 178 96)" />
-                          <ellipse cx="170" cy="76" rx="11" ry="6" transform="rotate(65 170 76)" />
-                          <ellipse cx="156" cy="58" rx="10" ry="5.5" transform="rotate(75 156 58)" />
-                          <ellipse cx="138" cy="46" rx="10" ry="5" transform="rotate(82 138 46)" />
-                          <ellipse cx="118" cy="38" rx="9" ry="5" transform="rotate(88 118 38)" />
-                        </g>
-                        {/* Bottom stem cross */}
-                        <line x1="80" y1="185" x2="100" y2="195" stroke="currentColor" strokeWidth="2" />
-                        <line x1="120" y1="185" x2="100" y2="195" stroke="currentColor" strokeWidth="2" />
-                      </svg>
-                      {/* Text content */}
-                      <div className="relative z-10 px-8 flex flex-col items-center gap-1">
-                        <span className="text-[9px] font-body tracking-[0.3em] uppercase opacity-70">
-                          {lang === "es" ? "Selección Oficial" : "Official Selection"}
+                      {/* Left branch */}
+                      <g opacity="0.9">
+                        <ellipse cx="36" cy="165" rx="16" ry="6" transform="rotate(-10 36 165)" />
+                        <ellipse cx="26" cy="143" rx="16" ry="6" transform="rotate(-22 26 143)" />
+                        <ellipse cx="20" cy="119" rx="15" ry="6" transform="rotate(-38 20 119)" />
+                        <ellipse cx="20" cy="95" rx="14" ry="5.5" transform="rotate(-55 20 95)" />
+                        <ellipse cx="28" cy="73" rx="13" ry="5" transform="rotate(-68 28 73)" />
+                        <ellipse cx="42" cy="55" rx="12" ry="5" transform="rotate(-78 42 55)" />
+                        <ellipse cx="62" cy="42" rx="11" ry="4.5" transform="rotate(-85 62 42)" />
+                        <ellipse cx="84" cy="35" rx="10" ry="4" transform="rotate(-89 84 35)" />
+                      </g>
+                      {/* Right branch */}
+                      <g opacity="0.9">
+                        <ellipse cx="164" cy="165" rx="16" ry="6" transform="rotate(10 164 165)" />
+                        <ellipse cx="174" cy="143" rx="16" ry="6" transform="rotate(22 174 143)" />
+                        <ellipse cx="180" cy="119" rx="15" ry="6" transform="rotate(38 180 119)" />
+                        <ellipse cx="180" cy="95" rx="14" ry="5.5" transform="rotate(55 180 95)" />
+                        <ellipse cx="172" cy="73" rx="13" ry="5" transform="rotate(68 172 73)" />
+                        <ellipse cx="158" cy="55" rx="12" ry="5" transform="rotate(78 158 55)" />
+                        <ellipse cx="138" cy="42" rx="11" ry="4.5" transform="rotate(85 138 42)" />
+                        <ellipse cx="116" cy="35" rx="10" ry="4" transform="rotate(89 116 35)" />
+                      </g>
+                      {/* Bottom cross */}
+                      <line x1="78" y1="185" x2="100" y2="198" stroke="currentColor" strokeWidth="2.5" />
+                      <line x1="122" y1="185" x2="100" y2="198" stroke="currentColor" strokeWidth="2.5" />
+                    </svg>
+                    {/* Text content — sans-serif */}
+                    <div className="relative z-10 px-7 flex flex-col items-center gap-0.5">
+                      <span className="font-body text-[10px] tracking-[0.25em] uppercase text-muted-foreground">
+                        {lang === "es" ? "Selección Oficial" : "Official Selection"}
+                      </span>
+                      <span className={`font-body text-sm font-black uppercase tracking-wide leading-tight mt-1 ${laurel.highlight ? "text-primary" : "text-foreground"}`}>
+                        {laurel.main}
+                      </span>
+                      {laurel.sub && (
+                        <span className="font-body text-[9px] leading-tight text-muted-foreground mt-0.5">
+                          {laurel.sub}
                         </span>
-                        <span className="font-heading text-[11px] font-bold leading-tight italic mt-1">
-                          {festName}
-                        </span>
-                        {year && (
-                          <span className="text-[11px] font-body font-semibold tracking-wider mt-1">
-                            {year}
-                          </span>
-                        )}
-                      </div>
-                    </motion.div>
-                  );
-                })}
+                      )}
+                      <span className="font-body text-xs font-semibold tracking-widest text-foreground mt-1">
+                        {laurel.year}
+                      </span>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             </div>
           )}
