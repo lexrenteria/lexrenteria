@@ -5,6 +5,13 @@ import stillAgaves from "@/assets/still-agaves.jpg";
 import stillPurpura from "@/assets/still-purpura-neon.jpg";
 import stillVideoclub from "@/assets/still-ultimo-videoclub.png";
 
+export interface Laurel {
+  main: string;
+  sub?: string;
+  year: string;
+  highlight?: boolean;
+}
+
 export interface Project {
   slug: string;
   title: string;
@@ -22,7 +29,7 @@ export interface Project {
   language: string;
   duration?: string;
   awards?: { es: string; en: string };
-  laurels?: { text: string; highlight?: boolean }[];
+  laurels?: Laurel[];
   watchUrl?: string;
   gallery?: string[];
 }
@@ -52,13 +59,13 @@ export const projects: Project[] = [
       en: "Official selection at the Guadalajara International Film Festival (FICG) 2024, Made in Jalisco section.",
     },
     laurels: [
-      { text: "FICG Festival Internacional de Cine de Guadalajara 2024 (Sección Hecho en Jalisco)", highlight: true },
-      { text: "Shorts México 2024" },
-      { text: "Festival Mix México 28 (2024)" },
-      { text: "Queer International Film Festival Playa del Carmen 2024" },
-      { text: "FICCMADERO Festival Internacional de Cine de Ciudad Madero 2024" },
-      { text: "Krew! Festidrag de Cine 2024" },
-      { text: "FICLAPAZ Festival Internacional de Cine de La Paz 2024" },
+      { main: "FICG", sub: "Festival Internacional de Cine de Guadalajara", year: "2024", highlight: true },
+      { main: "Shorts México", year: "2024" },
+      { main: "Festival Mix México", year: "2024" },
+      { main: "Queer International Film Festival", sub: "Playa del Carmen", year: "2024" },
+      { main: "FICCMADERO", sub: "Festival Internacional de Cine de Ciudad Madero", year: "2024" },
+      { main: "Krew!", sub: "Festidrag de Cine", year: "2024" },
+      { main: "FICLAPAZ", sub: "Festival Internacional de Cine de La Paz", year: "2024" },
     ],
     watchUrl: "https://www.nuestrocine.mx/detail/1546",
     gallery: [
@@ -96,10 +103,10 @@ export const projects: Project[] = [
       en: "Official selection FICTEQ.",
     },
     laurels: [
-      { text: "FICTEQUILA Festival Internacional de Cine de Tequila 2024 (Sección Rally Expresso Tequila)", highlight: true },
-      { text: "Shorts México 2024" },
-      { text: "Queer International Film Festival Playa del Carmen 2024" },
-      { text: "FICI Festival Internacional de Cine Independiente LGBTIQ+ 2025" },
+      { main: "FICTEQUILA", sub: "Festival Internacional de Cine de Tequila", year: "2024", highlight: true },
+      { main: "Shorts México", year: "2024" },
+      { main: "Queer International Film Festival", sub: "Playa del Carmen", year: "2024" },
+      { main: "FICI", sub: "Festival Internacional de Cine Independiente LGBTIQ+", year: "2025" },
     ],
     watchUrl: "https://www.nuestrocine.mx/detail/1517",
     gallery: [
