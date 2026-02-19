@@ -12,7 +12,7 @@ const dictionary = {
   },
   hero: {
     subtitle: {
-      es: "Filmmaker Queer. Explorando identidad y memoria.",
+      es: "Cineasta Queer. Explorando identidad y memoria.",
       en: "Queer Filmmaker. Exploring identity and memory.",
     },
     cta: { es: "Ver proyectos", en: "View projects" },
