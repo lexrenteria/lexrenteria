@@ -7,6 +7,7 @@ import ProjectGallery from "@/components/ProjectGallery";
 import { useI18n } from "@/lib/i18n";
 import { projects } from "@/lib/projects";
 import { motion } from "framer-motion";
+import { ExternalLink } from "lucide-react";
 
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -78,6 +79,26 @@ const ProjectDetail = () => {
             </span>
           )}
 
+          {/* Watch Online CTA */}
+          {project.watchUrl && (
+            <div className="mb-12">
+              <a
+                href={project.watchUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-3 w-full sm:w-auto sm:inline-flex bg-primary text-primary-foreground px-10 py-4 text-base font-body font-semibold tracking-widest uppercase rounded-sm hover:opacity-90 transition-opacity duration-300"
+              >
+                <ExternalLink size={18} />
+                {lang === "es" ? "Ver Película" : "Watch Film"}
+              </a>
+              <p className="text-xs text-muted-foreground font-body mt-3">
+                {lang === "es"
+                  ? "Disponible gratis en Nuestro Cine MX (Requiere crear una cuenta gratuita)."
+                  : "Available free on Nuestro Cine MX (Free account required)."}
+              </p>
+            </div>
+          )}
+
           {/* Synopsis */}
           <div className="mb-12">
             <h2 className="font-heading text-2xl font-bold text-foreground mb-4">
@@ -103,8 +124,44 @@ const ProjectDetail = () => {
             ))}
           </div>
 
-          {/* Awards */}
-          {project.awards && (
+          {/* Awards & Selections with Laurels */}
+          {project.laurels && project.laurels.length > 0 && (
+            <div className="mb-12">
+              <h2 className="font-heading text-2xl font-bold text-foreground mb-6">
+                {t.detail.awards[lang]}
+              </h2>
+              <ul className="space-y-3">
+                {project.laurels.map((laurel, i) => (
+                  <li
+                    key={i}
+                    className={`flex items-start gap-3 font-body text-sm ${
+                      laurel.highlight ? "text-primary font-semibold" : "text-muted-foreground"
+                    }`}
+                  >
+                    <svg
+                      className={`shrink-0 mt-0.5 ${laurel.highlight ? "text-primary" : "text-muted-foreground/60"}`}
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M6 9c0-3.5 2-6 6-6s6 2.5 6 6c0 3-1.5 5-3 6.5L12 22l-3-6.5C7.5 14 6 12 6 9z" />
+                      <path d="M12 6v2" />
+                      <circle cx="12" cy="11" r="2" />
+                    </svg>
+                    <span>{laurel.text}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Legacy awards fallback */}
+          {project.awards && !project.laurels && (
             <div className="mb-12">
               <h2 className="font-heading text-2xl font-bold text-foreground mb-4">
                 {t.detail.awards[lang]}
@@ -116,18 +173,6 @@ const ProjectDetail = () => {
           {/* Gallery */}
           {project.gallery && project.gallery.length > 0 && (
             <ProjectGallery images={project.gallery} title={project.title} />
-          )}
-
-          {/* Watch link */}
-          {project.watchUrl && (
-            <a
-              href={project.watchUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block border border-primary/40 px-8 py-3 text-sm font-body tracking-widest uppercase text-primary hover:bg-primary/10 transition-all duration-300 accent-border-hover rounded-sm"
-            >
-              {t.detail.watchOnline[lang]}
-            </a>
           )}
 
           {/* Related Projects */}
