@@ -1,42 +1,7 @@
 import { motion } from "framer-motion";
-
-interface Project {
-  title: string;
-  year: string;
-  status: string;
-  festival?: string;
-  role: string;
-}
-
-const projects: Project[] = [
-  {
-    title: "El último videoclub",
-    year: "TBA",
-    status: "En Producción",
-    role: "Director / Guionista",
-    festival: "Ópera Prima",
-  },
-  {
-    title: "Púrpura Neón",
-    year: "2024",
-    status: "Estrenado",
-    role: "Director / Guionista",
-    festival: "FICG 39",
-  },
-  {
-    title: "Agaves al alba",
-    year: "2024",
-    status: "Estrenado",
-    role: "Director / Guionista",
-    festival: "FICTEQ",
-  },
-  {
-    title: "Tailored for You",
-    year: "2026",
-    status: "En Producción",
-    role: "Productor",
-  },
-];
+import { useI18n } from "@/lib/i18n";
+import { projects } from "@/lib/projects";
+import { Link } from "react-router-dom";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 40 },
@@ -48,8 +13,10 @@ const cardVariants = {
 };
 
 const ProjectsSection = () => {
+  const { lang, t } = useI18n();
+
   return (
-    <section id="projects" className="relative py-28 px-6" aria-label="Proyectos">
+    <section id="projects" className="relative py-28 px-6" aria-label={t.projects.title[lang]}>
       <div className="max-w-6xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -58,43 +25,49 @@ const ProjectsSection = () => {
           transition={{ duration: 0.7 }}
           className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-16 text-center"
         >
-          Proyectos
+          {t.projects.title[lang]}
         </motion.h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, i) => (
             <motion.article
-              key={project.title}
+              key={project.slug}
               custom={i}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={cardVariants}
-              className="group relative border border-border rounded-sm p-8 bg-card-gradient transition-all duration-500 neon-border-hover cursor-default"
+              className="group relative border border-border rounded-sm overflow-hidden bg-card-gradient transition-all duration-500 accent-border-hover"
             >
-              {/* Status badge */}
-              <span className="inline-block text-xs font-body tracking-widest uppercase text-primary mb-4">
-                {project.status}
-              </span>
-
-              <h3 className="font-heading text-2xl sm:text-3xl font-bold text-foreground mb-2 italic">
-                {project.title}
-              </h3>
-
-              <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-foreground font-body">
-                <span>{project.year}</span>
-                <span>·</span>
-                <span>{project.role}</span>
-                {project.festival && (
-                  <>
+              <Link to={`/projects/${project.slug}`} className="block">
+                <div className="aspect-[2/3] overflow-hidden">
+                  <img
+                    src={project.poster}
+                    alt={`${project.title} poster`}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-6">
+                  <span className="inline-block text-xs font-body tracking-widest uppercase text-primary mb-2">
+                    {project.status[lang]}
+                  </span>
+                  <h3 className="font-heading text-xl sm:text-2xl font-bold text-foreground mb-1 italic">
+                    {project.title}
+                  </h3>
+                  <div className="flex flex-wrap gap-x-3 gap-y-1 text-sm text-muted-foreground font-body">
+                    <span>{project.year}</span>
                     <span>·</span>
-                    <span className="text-primary/80">{project.festival}</span>
-                  </>
-                )}
-              </div>
-
-              {/* Subtle hover glow */}
-              <div className="absolute inset-0 rounded-sm bg-primary/0 group-hover:bg-primary/[0.02] transition-colors duration-500 pointer-events-none" />
+                    <span>{project.role[lang]}</span>
+                    {project.festival && (
+                      <>
+                        <span>·</span>
+                        <span className="text-primary/80">{project.festival}</span>
+                      </>
+                    )}
+                  </div>
+                </div>
+              </Link>
             </motion.article>
           ))}
         </div>

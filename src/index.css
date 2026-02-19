@@ -15,8 +15,8 @@
     --popover: 0 0% 5%;
     --popover-foreground: 0 0% 92%;
 
-    --primary: 274 100% 65%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 60 97% 79%;
+    --primary-foreground: 0 0% 5%;
 
     --secondary: 0 0% 10%;
     --secondary-foreground: 0 0% 80%;
@@ -24,24 +24,24 @@
     --muted: 0 0% 12%;
     --muted-foreground: 0 0% 55%;
 
-    --accent: 274 100% 65%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 60 97% 79%;
+    --accent-foreground: 0 0% 5%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 0 0% 14%;
     --input: 0 0% 14%;
-    --ring: 274 100% 65%;
+    --ring: 60 97% 79%;
 
     --radius: 0.5rem;
 
     /* Custom tokens */
-    --neon-purple: 274 100% 65%;
-    --neon-glow: 0 0 20px hsl(274 100% 65% / 0.4), 0 0 60px hsl(274 100% 65% / 0.15);
-    --neon-glow-strong: 0 0 30px hsl(274 100% 65% / 0.6), 0 0 80px hsl(274 100% 65% / 0.25);
+    --accent-yellow: 60 97% 79%;
+    --accent-glow: 0 0 20px hsl(60 97% 79% / 0.3), 0 0 60px hsl(60 97% 79% / 0.1);
+    --accent-glow-strong: 0 0 30px hsl(60 97% 79% / 0.5), 0 0 80px hsl(60 97% 79% / 0.2);
     --surface-elevated: 0 0% 7%;
-    --gradient-cinematic: linear-gradient(180deg, hsl(0 0% 2%) 0%, hsl(0 0% 4%) 50%, hsl(274 30% 5%) 100%);
+    --gradient-cinematic: linear-gradient(180deg, hsl(0 0% 2%) 0%, hsl(0 0% 4%) 50%, hsl(0 0% 3%) 100%);
     --gradient-card: linear-gradient(145deg, hsl(0 0% 8%) 0%, hsl(0 0% 4%) 100%);
 
     --font-heading: 'Playfair Display', Georgia, serif;
@@ -67,19 +67,18 @@
 }
 
 @layer utilities {
-  .text-neon {
-    color: hsl(var(--neon-purple));
-    text-shadow: var(--neon-glow);
+  .text-accent-glow {
+    color: hsl(var(--accent-yellow));
+    text-shadow: var(--accent-glow);
   }
 
-  .neon-border {
-    border-color: hsl(var(--neon-purple) / 0.3);
-    box-shadow: var(--neon-glow);
+  .accent-border {
+    border-color: hsl(var(--accent-yellow) / 0.3);
   }
 
-  .neon-border-hover:hover {
-    border-color: hsl(var(--neon-purple) / 0.6);
-    box-shadow: var(--neon-glow-strong);
+  .accent-border-hover:hover {
+    border-color: hsl(var(--accent-yellow) / 0.6);
+    box-shadow: var(--accent-glow);
   }
 
   .bg-cinematic {

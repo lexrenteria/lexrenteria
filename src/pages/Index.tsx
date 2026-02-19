@@ -1,7 +1,9 @@
 import { HelmetProvider } from "react-helmet-async";
 import SEOHead from "@/components/SEOHead";
 import SchemaMarkup from "@/components/SchemaMarkup";
+import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import DemoReelSection from "@/components/DemoReelSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import AboutSection from "@/components/AboutSection";
 import FooterSection from "@/components/FooterSection";
@@ -16,8 +18,6 @@ import FooterSection from "@/components/FooterSection";
  * 
  * MOVIE SCHEMAS (one per film):
  *   Add them to the `schemas` prop of the second <SchemaMarkup />.
- *
- * You can also use `rawJsonLd` prop with raw JSON strings if preferred.
  */
 
 const Index = () => {
@@ -26,23 +26,16 @@ const Index = () => {
       <SEOHead />
 
       {/* === PASTE PERSON & ORGANIZATION SCHEMAS HERE === */}
-      <SchemaMarkup
-        schemas={[
-          // Example: { "@context": "https://schema.org", "@type": "Person", "name": "Lex Rentería", ... }
-          // Example: { "@context": "https://schema.org", "@type": "Organization", "name": "Kauyi Media Group", ... }
-        ]}
-      />
+      <SchemaMarkup schemas={[]} />
 
       {/* === PASTE MOVIE SCHEMAS HERE === */}
-      <SchemaMarkup
-        schemas={[
-          // Example: { "@context": "https://schema.org", "@type": "Movie", "name": "Púrpura Neón", ... }
-          // Example: { "@context": "https://schema.org", "@type": "Movie", "name": "El último videoclub", ... }
-        ]}
-      />
+      <SchemaMarkup schemas={[]} />
 
+      <Navbar />
       <main className="bg-cinematic min-h-screen">
         <HeroSection />
+        <div className="border-t border-border" />
+        <DemoReelSection />
         <div className="border-t border-border" />
         <ProjectsSection />
         <div className="border-t border-border" />
