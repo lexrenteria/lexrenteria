@@ -124,39 +124,81 @@ const ProjectDetail = () => {
             ))}
           </div>
 
-          {/* Awards & Selections with Laurels */}
+          {/* Awards & Selections — Film Industry Laurels */}
           {project.laurels && project.laurels.length > 0 && (
             <div className="mb-12">
-              <h2 className="font-heading text-2xl font-bold text-foreground mb-6">
+              <h2 className="font-heading text-2xl font-bold text-foreground mb-8 text-center">
                 {t.detail.awards[lang]}
               </h2>
-              <ul className="space-y-3">
-                {project.laurels.map((laurel, i) => (
-                  <li
-                    key={i}
-                    className={`flex items-start gap-3 font-body text-sm ${
-                      laurel.highlight ? "text-primary font-semibold" : "text-muted-foreground"
-                    }`}
-                  >
-                    <svg
-                      className={`shrink-0 mt-0.5 ${laurel.highlight ? "text-primary" : "text-muted-foreground/60"}`}
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+              <div className="flex flex-wrap justify-center gap-6">
+                {project.laurels.map((laurel, i) => {
+                  const yearMatch = laurel.text.match(/(\d{4,})/);
+                  const year = yearMatch ? yearMatch[1] : "";
+                  const festName = laurel.text.replace(/\s*\d{4,}\s*/, " ").trim();
+                  const isHighlight = laurel.highlight;
+
+                  return (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, scale: 0.85 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: i * 0.07 }}
+                      className={`relative flex flex-col items-center justify-center text-center w-[170px] h-[190px] ${
+                        isHighlight ? "text-primary" : "text-foreground"
+                      }`}
                     >
-                      <path d="M6 9c0-3.5 2-6 6-6s6 2.5 6 6c0 3-1.5 5-3 6.5L12 22l-3-6.5C7.5 14 6 12 6 9z" />
-                      <path d="M12 6v2" />
-                      <circle cx="12" cy="11" r="2" />
-                    </svg>
-                    <span>{laurel.text}</span>
-                  </li>
-                ))}
-              </ul>
+                      {/* Laurel Wreath SVG */}
+                      <svg
+                        viewBox="0 0 200 220"
+                        className="absolute inset-0 w-full h-full"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        {/* Left branch */}
+                        <g opacity="0.85">
+                          <ellipse cx="38" cy="160" rx="14" ry="7" transform="rotate(-15 38 160)" />
+                          <ellipse cx="28" cy="140" rx="14" ry="7" transform="rotate(-25 28 140)" />
+                          <ellipse cx="22" cy="118" rx="13" ry="7" transform="rotate(-40 22 118)" />
+                          <ellipse cx="22" cy="96" rx="12" ry="6" transform="rotate(-55 22 96)" />
+                          <ellipse cx="30" cy="76" rx="11" ry="6" transform="rotate(-65 30 76)" />
+                          <ellipse cx="44" cy="58" rx="10" ry="5.5" transform="rotate(-75 44 58)" />
+                          <ellipse cx="62" cy="46" rx="10" ry="5" transform="rotate(-82 62 46)" />
+                          <ellipse cx="82" cy="38" rx="9" ry="5" transform="rotate(-88 82 38)" />
+                        </g>
+                        {/* Right branch */}
+                        <g opacity="0.85">
+                          <ellipse cx="162" cy="160" rx="14" ry="7" transform="rotate(15 162 160)" />
+                          <ellipse cx="172" cy="140" rx="14" ry="7" transform="rotate(25 172 140)" />
+                          <ellipse cx="178" cy="118" rx="13" ry="7" transform="rotate(40 178 118)" />
+                          <ellipse cx="178" cy="96" rx="12" ry="6" transform="rotate(55 178 96)" />
+                          <ellipse cx="170" cy="76" rx="11" ry="6" transform="rotate(65 170 76)" />
+                          <ellipse cx="156" cy="58" rx="10" ry="5.5" transform="rotate(75 156 58)" />
+                          <ellipse cx="138" cy="46" rx="10" ry="5" transform="rotate(82 138 46)" />
+                          <ellipse cx="118" cy="38" rx="9" ry="5" transform="rotate(88 118 38)" />
+                        </g>
+                        {/* Bottom stem cross */}
+                        <line x1="80" y1="185" x2="100" y2="195" stroke="currentColor" strokeWidth="2" />
+                        <line x1="120" y1="185" x2="100" y2="195" stroke="currentColor" strokeWidth="2" />
+                      </svg>
+                      {/* Text content */}
+                      <div className="relative z-10 px-8 flex flex-col items-center gap-1">
+                        <span className="text-[9px] font-body tracking-[0.3em] uppercase opacity-70">
+                          {lang === "es" ? "Selección Oficial" : "Official Selection"}
+                        </span>
+                        <span className="font-heading text-[11px] font-bold leading-tight italic mt-1">
+                          {festName}
+                        </span>
+                        {year && (
+                          <span className="text-[11px] font-body font-semibold tracking-wider mt-1">
+                            {year}
+                          </span>
+                        )}
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
             </div>
           )}
 
