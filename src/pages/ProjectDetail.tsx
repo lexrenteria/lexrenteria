@@ -3,6 +3,7 @@ import { HelmetProvider } from "react-helmet-async";
 import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/Navbar";
 import FooterSection from "@/components/FooterSection";
+import ProjectGallery from "@/components/ProjectGallery";
 import { useI18n } from "@/lib/i18n";
 import { projects } from "@/lib/projects";
 import { motion } from "framer-motion";
@@ -110,6 +111,11 @@ const ProjectDetail = () => {
               </h2>
               <p className="text-muted-foreground font-body">{project.awards[lang]}</p>
             </div>
+          )}
+
+          {/* Gallery */}
+          {project.gallery && project.gallery.length > 0 && (
+            <ProjectGallery images={project.gallery} title={project.title} />
           )}
 
           {/* Watch link */}
