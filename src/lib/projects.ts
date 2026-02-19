@@ -22,6 +22,7 @@ export interface Project {
   language: string;
   duration?: string;
   awards?: { es: string; en: string };
+  laurels?: { text: string; highlight?: boolean }[];
   watchUrl?: string;
   gallery?: string[];
 }
@@ -50,7 +51,16 @@ export const projects: Project[] = [
       es: "Selección oficial en el Festival Internacional de Cine en Guadalajara (FICG) 2024, sección Hecho en Jalisco.",
       en: "Official selection at the Guadalajara International Film Festival (FICG) 2024, Made in Jalisco section.",
     },
-    watchUrl: "https://tv.festhome.com/view_film/294886",
+    laurels: [
+      { text: "FICG Festival Internacional de Cine de Guadalajara 2024 (Sección Hecho en Jalisco)", highlight: true },
+      { text: "Shorts México 2024" },
+      { text: "Festival Mix México 28 (2024)" },
+      { text: "Queer International Film Festival Playa del Carmen 2024" },
+      { text: "FICCMADERO Festival Internacional de Cine de Ciudad Madero 2024" },
+      { text: "Krew! Festidrag de Cine 2024" },
+      { text: "FICLAPAZ Festival Internacional de Cine de La Paz 2024" },
+    ],
+    watchUrl: "https://www.nuestrocine.mx/detail/1546",
     gallery: [
       "https://image.tmdb.org/t/p/original/xylHqiVLBpYxflZzmLNM5IAUrxf.jpg",
       "https://image.tmdb.org/t/p/original/n4mpWdQPWh3bM5nDrkImYulvBY4.jpg",
@@ -85,7 +95,13 @@ export const projects: Project[] = [
       es: "Selección oficial FICTEQ.",
       en: "Official selection FICTEQ.",
     },
-    watchUrl: "https://tv.festhome.com/view_film/307670",
+    laurels: [
+      { text: "FICTEQUILA Festival Internacional de Cine de Tequila 2024 (Sección Rally Expresso Tequila)", highlight: true },
+      { text: "Shorts México 2024" },
+      { text: "Queer International Film Festival Playa del Carmen 2024" },
+      { text: "FICI Festival Internacional de Cine Independiente LGBTIQ+ 2025" },
+    ],
+    watchUrl: "https://www.nuestrocine.mx/detail/1517",
     gallery: [
       "https://image.tmdb.org/t/p/original/rScJM707GozCiyT42qwkJnlMazh.jpg",
       "https://image.tmdb.org/t/p/original/j3cWiRZrJVcHQ6eVH0hsy0ZtHVI.jpg",
