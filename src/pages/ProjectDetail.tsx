@@ -149,6 +149,16 @@ const ProjectDetail = () => {
             </div>
           </div>
 
+          {/* Legacy awards fallback */}
+          {project.awards && !project.laurels && (
+            <div className="mb-12">
+              <h2 className="font-heading text-2xl font-bold text-foreground mb-4">
+                {t.detail.awards[lang]}
+              </h2>
+              <p className="text-muted-foreground font-body">{project.awards[lang]}</p>
+            </div>
+          )}
+
           {/* ── ZONE C: Awards & Laurels (Full Width, below synopsis) ── */}
           {project.laurels && project.laurels.length > 0 && (
             <div className="mb-16">
@@ -240,16 +250,6 @@ const ProjectDetail = () => {
                   </motion.div>
                 ))}
               </div>
-            </div>
-          )}
-
-          {/* Legacy awards fallback */}
-          {project.awards && !project.laurels && (
-            <div className="mb-12">
-              <h2 className="font-heading text-2xl font-bold text-foreground mb-4">
-                {t.detail.awards[lang]}
-              </h2>
-              <p className="text-muted-foreground font-body">{project.awards[lang]}</p>
             </div>
           )}
 
