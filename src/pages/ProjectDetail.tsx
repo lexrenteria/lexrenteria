@@ -41,7 +41,14 @@ const ProjectDetail = () => {
         description={project.synopsis[lang].slice(0, 155)}
       />
       <Navbar />
-      <main className="bg-cinematic min-h-screen pt-16">
+      <main
+        className="bg-cinematic min-h-screen pt-16"
+        style={{
+          "--primary": project.accent,
+          "--accent": project.accent,
+          "--ring": project.accent,
+        } as React.CSSProperties}
+      >
         {/* ── ZONE A: Hero + Title + CTA ── */}
         <div className="relative w-full aspect-video max-h-[60vh] overflow-hidden">
           <img

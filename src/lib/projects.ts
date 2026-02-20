@@ -17,6 +17,8 @@ export interface Project {
   title: string;
   year: string;
   sortOrder: number;
+  /** HSL values (no hsl() wrapper) used as the per-project accent, e.g. "272 55% 62%" */
+  accent: string;
   status: { es: string; en: string };
   role: { es: string; en: string };
   festival?: string;
@@ -40,6 +42,7 @@ export const projects: Project[] = [
     title: "Púrpura Neón",
     year: "2024",
     sortOrder: 1,
+    accent: "272 55% 62%",
     status: { es: "Estrenado", en: "Released" },
     role: { es: "Director / Guionista", en: "Director / Writer" },
     festival: "FICG 39",
@@ -84,6 +87,7 @@ export const projects: Project[] = [
     title: "Agaves al alba",
     year: "2024",
     sortOrder: 2,
+    accent: "174 55% 42%",
     status: { es: "Estrenado", en: "Released" },
     role: { es: "Director / Guionista", en: "Director / Writer" },
     festival: "FICTEQ",
@@ -129,6 +133,7 @@ export const projects: Project[] = [
     title: "El último videoclub",
     year: "TBA",
     sortOrder: 3,
+    accent: "213 70% 55%",
     status: { es: "En Producción", en: "In Production" },
     role: { es: "Director / Guionista", en: "Director / Writer" },
     poster: posterVideoclub,

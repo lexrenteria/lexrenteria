@@ -6,10 +6,11 @@ const Navbar = () => {
   const { lang, setLang, t } = useI18n();
 
   const links = [
-    { label: t.nav.home[lang], href: "/#top" },
-    { label: t.nav.projects[lang], href: "/#projects" },
-    { label: t.nav.about[lang], href: "/#about" },
-    { label: t.nav.contact[lang], href: "/#contact" },
+    { label: t.nav.home[lang], href: "#hero" },
+    { label: t.nav.about[lang], href: "#about" },
+    { label: t.nav.projects[lang], href: "#projects" },
+    { label: t.nav.reel[lang], href: "#reel" },
+    { label: t.nav.contact[lang], href: "#contact" },
   ];
 
   return (
