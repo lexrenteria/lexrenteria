@@ -67,46 +67,89 @@ const ProjectDetail = () => {
             {t.detail.back[lang]}
           </Link>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="font-heading text-4xl sm:text-5xl md:text-6xl font-black text-foreground italic mb-4"
-          >
-            {project.title}
-          </motion.h1>
-
-          {project.year === "TBA" ? (
-            <span className="inline-block text-xs font-body tracking-widest uppercase text-primary mb-8">
-              {lang === "es" ? "En desarrollo" : "In Development"}
-            </span>
-          ) : (
-            <span className="inline-block text-xs font-body tracking-widest uppercase text-muted-foreground mb-8">
-              {project.year}
-            </span>
-          )}
-
-          {/* Watch Online CTA */}
-          {project.watchUrl && (
-            <div className="mb-16">
-              <a
-                href={project.watchUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-3 w-full sm:w-auto sm:inline-flex bg-primary text-primary-foreground px-10 py-4 text-base font-body font-semibold tracking-widest uppercase rounded-sm hover:opacity-90 transition-opacity duration-300"
+          {/* ── ZONE A: Title + Poster/Specs side by side ── */}
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 mb-16">
+            {/* Left: Title, metadata, CTA */}
+            <div className="lg:col-span-3">
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7 }}
+                className="font-heading text-4xl sm:text-5xl md:text-6xl font-black text-foreground italic mb-4"
               >
-                <ExternalLink size={18} />
-                {lang === "es" ? "Ver Película" : "Watch Film"}
-              </a>
-              <p className="text-xs text-muted-foreground font-body mt-3">
-                {lang === "es"
-                  ? "Disponible gratis en Nuestro Cine MX (Requiere crear una cuenta gratuita)."
-                  : "Available free on Nuestro Cine MX (Free account required)."}
-              </p>
-            </div>
-          )}
+                {project.title}
+              </motion.h1>
 
-          {/* ── ZONE B: Awards & Laurels (Full Width) ── */}
+              {project.year === "TBA" ? (
+                <span className="inline-block text-xs font-body tracking-widest uppercase text-primary mb-8">
+                  {lang === "es" ? "En desarrollo" : "In Development"}
+                </span>
+              ) : (
+                <span className="inline-block text-xs font-body tracking-widest uppercase text-muted-foreground mb-8">
+                  {project.year}
+                </span>
+              )}
+
+              {/* Watch Online CTA */}
+              {project.watchUrl && (
+                <div className="mt-8">
+                  <a
+                    href={project.watchUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-3 w-full sm:w-auto sm:inline-flex bg-primary text-primary-foreground px-10 py-4 text-base font-body font-semibold tracking-widest uppercase rounded-sm hover:opacity-90 transition-opacity duration-300"
+                  >
+                    <ExternalLink size={18} />
+                    {lang === "es" ? "Ver Película" : "Watch Film"}
+                  </a>
+                  <p className="text-xs text-muted-foreground font-body mt-3">
+                    {lang === "es"
+                      ? "Disponible gratis en Nuestro Cine MX (Requiere crear una cuenta gratuita)."
+                      : "Available free on Nuestro Cine MX (Free account required)."}
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* Right: Official Poster + Tech Specs */}
+            <div className="lg:col-span-2 space-y-8">
+              <div className="border border-border rounded-sm overflow-hidden">
+                <img
+                  src={project.poster}
+                  alt={`${project.title} poster`}
+                  className="w-full h-auto object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <div className="border border-border rounded-sm overflow-hidden">
+                {details.map((d, i) => (
+                  <div
+                    key={d.label}
+                    className={`flex justify-between px-5 py-3 text-sm font-body ${
+                      i % 2 === 0 ? "bg-card" : "bg-background"
+                    }`}
+                  >
+                    <span className="text-muted-foreground">{d.label}</span>
+                    <span className="text-foreground text-right">{d.value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* ── ZONE B: Synopsis (full width) ── */}
+          <div className="mb-16">
+            <h2 className="font-heading text-2xl font-bold text-foreground mb-6">
+              {t.detail.synopsis[lang]}
+            </h2>
+            <div className="text-muted-foreground font-body text-base leading-relaxed space-y-4 max-w-3xl">
+              {project.synopsis[lang].split("\n\n").map((paragraph, i) => (
+                <p key={i}>{paragraph}</p>
+              ))}
+            </div>
+          </div>
+
+          {/* ── ZONE C: Awards & Laurels (Full Width, below synopsis) ── */}
           {project.laurels && project.laurels.length > 0 && (
             <div className="mb-16">
               <h2 className="font-body text-xs tracking-[0.3em] uppercase text-muted-foreground mb-10 text-center">
@@ -199,49 +242,6 @@ const ProjectDetail = () => {
               </div>
             </div>
           )}
-
-          {/* ── ZONE C: Split Layout — Synopsis + Poster/Specs ── */}
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 mb-16">
-            {/* Left Column (60%) — Synopsis */}
-            <div className="lg:col-span-3">
-              <h2 className="font-heading text-2xl font-bold text-foreground mb-6">
-                {t.detail.synopsis[lang]}
-              </h2>
-              <div className="text-muted-foreground font-body text-base leading-relaxed space-y-4">
-                {project.synopsis[lang].split("\n\n").map((paragraph, i) => (
-                  <p key={i}>{paragraph}</p>
-                ))}
-              </div>
-            </div>
-
-            {/* Right Column (40%) — Poster + Tech Specs */}
-            <div className="lg:col-span-2 space-y-8">
-              {/* Official Poster */}
-              <div className="border border-border rounded-sm overflow-hidden">
-                <img
-                  src={project.poster}
-                  alt={`${project.title} poster`}
-                  className="w-full h-auto object-cover"
-                  loading="lazy"
-                />
-              </div>
-
-              {/* Tech Specs Table */}
-              <div className="border border-border rounded-sm overflow-hidden">
-                {details.map((d, i) => (
-                  <div
-                    key={d.label}
-                    className={`flex justify-between px-5 py-3 text-sm font-body ${
-                      i % 2 === 0 ? "bg-card" : "bg-background"
-                    }`}
-                  >
-                    <span className="text-muted-foreground">{d.label}</span>
-                    <span className="text-foreground text-right">{d.value}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
 
           {/* Legacy awards fallback */}
           {project.awards && !project.laurels && (
