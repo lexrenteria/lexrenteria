@@ -59,7 +59,7 @@ const HeroSection = () => {
         <motion.div
           key={idx}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.45 }}
+          animate={{ opacity: 0.7 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 2, ease: "easeInOut" }}
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -68,7 +68,7 @@ const HeroSection = () => {
       </AnimatePresence>
 
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-background/60" />
+      <div className="absolute inset-0 bg-background/40" />
 
       {/* Gradient vignette */}
       <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/60" />
