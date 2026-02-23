@@ -111,14 +111,7 @@ const HeroSection = () => {
             {t.about.bio1[lang]}
           </motion.p>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-3 text-base font-body text-muted-foreground/80 leading-relaxed max-w-lg mx-auto md:mx-0"
-          >
-            {renderBioWithLinks(t.about.bio2[lang])}
-          </motion.p>
+
 
           <motion.div
             initial={{ opacity: 0, y: 15 }}
