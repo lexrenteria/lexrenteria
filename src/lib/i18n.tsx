@@ -29,12 +29,12 @@ const dictionary = {
   about: {
     title: { es: "Sobre mí", en: "About" },
     bio1: {
-      es: "Soy director y guionista basado en Guadalajara, México. Mi trabajo explora las intersecciones entre identidad, memoria y la experiencia queer a través del cine.",
-      en: "I'm a director and screenwriter based in Guadalajara, Mexico. My work explores the intersections of identity, memory, and the queer experience through film.",
+      es: "Soy Lex Rentería, cineasta queer originario de Guadalajara y fundador de la productora Kauyi. Mi trabajo se centra en contar historias de la comunidad LGBTQ+, abordando la memoria y la resistencia a través de una representación auténtica.",
+      en: "I'm Lex Rentería, a queer filmmaker from Guadalajara and founder of the production company Kauyi. My work focuses on telling stories from the LGBTQ+ community, addressing memory and resistance through authentic representation.",
     },
     bio2: {
-      es: "Fundador de Kauyi Media Group, una productora dedicada a contar historias que desafían narrativas convencionales y amplifican voces diversas.",
-      en: "Founder of Kauyi Media Group, a production company dedicated to telling stories that challenge conventional narratives and amplify diverse voices.",
+      es: "En mis películas, busco un cine que se sienta físicamente en la piel, logrando un equilibrio muy bello entre la atmósfera del relato y los detalles técnicos. Apoyándome en un ritmo inmersivo, un cuidadoso diseño de producción y el uso estratégico de locaciones, construyo narrativas que desafían la linealidad. Mi filmografía incluye el cortometraje {agaves}, mi debut como director con {purpura} en el FICG 2024, y mi rol como productor en Tailored for You (2026). Actualmente desarrollo mi primer largometraje, {videoclub}.",
+      en: "In my films, I seek a cinema that is physically felt on the skin, achieving a beautiful balance between the atmosphere of the story and the technical details. Relying on an immersive rhythm, careful production design, and the strategic use of locations, I build narratives that challenge linearity. My filmography includes the short film {agaves}, my directorial debut with {purpura} at FICG 2024, and my role as producer on Tailored for You (2026). I'm currently developing my first feature film, {videoclub}.",
     },
     director: { es: "director", en: "director" },
     writer: { es: "guionista", en: "screenwriter" },

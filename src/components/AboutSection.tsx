@@ -1,6 +1,38 @@
 import { motion } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
+import { Link } from "react-router-dom";
 import portrait from "@/assets/portrait-lex.png";
+
+/** Replace {agaves}, {purpura}, {videoclub} tokens with <Link> elements */
+const renderBioWithLinks = (text: string) => {
+  const tokens: Record<string, { title: string; slug: string }> = {
+    "{agaves}": { title: "Agaves al Alba", slug: "agaves-al-alba" },
+    "{purpura}": { title: "Púrpura Neón", slug: "purpura-neon" },
+    "{videoclub}": { title: "El último videoclub", slug: "el-ultimo-videoclub" },
+  };
+
+  const regex = /\{agaves\}|\{purpura\}|\{videoclub\}/g;
+  const parts: (string | JSX.Element)[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) parts.push(text.slice(lastIndex, match.index));
+    const token = tokens[match[0]];
+    parts.push(
+      <Link
+        key={match.index}
+        to={`/projects/${token.slug}`}
+        className="text-primary hover:underline italic"
+      >
+        {token.title}
+      </Link>
+    );
+    lastIndex = regex.lastIndex;
+  }
+  if (lastIndex < text.length) parts.push(text.slice(lastIndex));
+  return parts;
+};
 
 const AboutSection = () => {
   const { lang, t } = useI18n();
@@ -35,26 +67,8 @@ const AboutSection = () => {
             {t.about.title[lang]}
           </h2>
           <div className="space-y-6 text-muted-foreground font-body text-lg leading-relaxed">
-            <p>
-              {lang === "es" ? (
-                <>
-                  Soy <span className="text-foreground font-medium">{t.about.director[lang]} y {t.about.writer[lang]}</span> basado
-                  en Guadalajara, México. Mi trabajo explora las intersecciones entre{" "}
-                  <span className="text-primary">{t.about.identity[lang]}</span>,{" "}
-                  <span className="text-primary">{t.about.memory[lang]}</span> y la experiencia queer
-                  a través del cine.
-                </>
-              ) : (
-                <>
-                  I'm a <span className="text-foreground font-medium">{t.about.director[lang]} and {t.about.writer[lang]}</span> based
-                  in Guadalajara, Mexico. My work explores the intersections of{" "}
-                  <span className="text-primary">{t.about.identity[lang]}</span>,{" "}
-                  <span className="text-primary">{t.about.memory[lang]}</span>, and the queer experience
-                  through film.
-                </>
-              )}
-            </p>
-            <p>{t.about.bio2[lang]}</p>
+            <p>{t.about.bio1[lang]}</p>
+            <p>{renderBioWithLinks(t.about.bio2[lang])}</p>
           </div>
         </motion.div>
       </div>

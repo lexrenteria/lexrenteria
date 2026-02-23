@@ -3,9 +3,41 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 import { projects } from "@/lib/projects";
 import portrait from "@/assets/portrait-lex.png";
+import { Link } from "react-router-dom";
 
 const stills = projects.map((p) => p.still);
 const INTERVAL = 6000;
+
+/** Replace {agaves}, {purpura}, {videoclub} tokens with <Link> elements */
+const renderBioWithLinks = (text: string) => {
+  const tokens: Record<string, { title: string; slug: string }> = {
+    "{agaves}": { title: "Agaves al Alba", slug: "agaves-al-alba" },
+    "{purpura}": { title: "Púrpura Neón", slug: "purpura-neon" },
+    "{videoclub}": { title: "El último videoclub", slug: "el-ultimo-videoclub" },
+  };
+
+  const regex = /\{agaves\}|\{purpura\}|\{videoclub\}/g;
+  const parts: (string | JSX.Element)[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) parts.push(text.slice(lastIndex, match.index));
+    const token = tokens[match[0]];
+    parts.push(
+      <Link
+        key={match.index}
+        to={`/projects/${token.slug}`}
+        className="text-primary hover:underline italic"
+      >
+        {token.title}
+      </Link>
+    );
+    lastIndex = regex.lastIndex;
+  }
+  if (lastIndex < text.length) parts.push(text.slice(lastIndex));
+  return parts;
+};
 
 const HeroSection = () => {
   const { lang, t } = useI18n();
@@ -76,7 +108,7 @@ const HeroSection = () => {
             transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="mt-4 text-lg sm:text-xl font-body text-muted-foreground leading-relaxed max-w-lg mx-auto md:mx-0"
           >
-            {t.hero.subtitle[lang]}
+            {t.about.bio1[lang]}
           </motion.p>
 
           <motion.p
@@ -85,7 +117,7 @@ const HeroSection = () => {
             transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
             className="mt-3 text-base font-body text-muted-foreground/80 leading-relaxed max-w-lg mx-auto md:mx-0"
           >
-            {t.about.bio2[lang]}
+            {renderBioWithLinks(t.about.bio2[lang])}
           </motion.p>
 
           <motion.div
