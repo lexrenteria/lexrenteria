@@ -109,6 +109,18 @@ const ProjectDetail = () => {
                   </p>
                 </div>
               )}
+
+              {/* ── Synopsis (below CTA, same column) ── */}
+              <div className="mt-10">
+                <h2 className="font-heading text-2xl font-bold text-foreground mb-4">
+                  {t.detail.synopsis[lang]}
+                </h2>
+                <div className="text-muted-foreground font-body text-base leading-relaxed space-y-4">
+                  {project.synopsis[lang].split("\n\n").map((paragraph, i) => (
+                    <p key={i}>{paragraph}</p>
+                  ))}
+                </div>
+              </div>
             </div>
 
             {/* Right: Official Poster + Tech Specs */}
@@ -134,18 +146,6 @@ const ProjectDetail = () => {
                   </div>
                 ))}
               </div>
-            </div>
-          </div>
-
-          {/* ── ZONE B: Synopsis (full width) ── */}
-          <div className="mb-16">
-            <h2 className="font-heading text-2xl font-bold text-foreground mb-6">
-              {t.detail.synopsis[lang]}
-            </h2>
-            <div className="text-muted-foreground font-body text-base leading-relaxed space-y-4 max-w-3xl">
-              {project.synopsis[lang].split("\n\n").map((paragraph, i) => (
-                <p key={i}>{paragraph}</p>
-              ))}
             </div>
           </div>
 
