@@ -97,7 +97,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="font-heading text-5xl sm:text-6xl md:text-7xl font-black tracking-tight text-foreground"
+            className="font-heading text-5xl sm:text-6xl md:text-7xl font-black tracking-tight text-foreground italic"
           >
             Lex Rentería
           </motion.h1>
@@ -109,7 +109,7 @@ const HeroSection = () => {
             className="mt-4 relative max-w-lg mx-auto md:mx-0"
           >
             <div className="absolute -inset-4 backdrop-blur-sm rounded-2xl [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />
-            <p className="relative text-lg sm:text-xl font-body text-muted-foreground leading-relaxed">
+            <p className="relative text-lg sm:text-xl font-body text-white leading-relaxed">
               {t.about.bio1[lang]}
             </p>
           </motion.div>
