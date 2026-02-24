@@ -19,7 +19,7 @@ const Navbar = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className="fixed top-0 left-0 right-0 z-50 border-b border-border/50"
-      style={{ backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)", backgroundColor: "hsl(0 0% 2% / 0.8)" }}
+      style={{ backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", backgroundColor: "hsl(0 0% 2% / 0.5)" }}
     >
       <div className="max-w-6xl mx-auto flex items-center justify-between h-16 px-6">
         <a href="/" className="font-heading text-lg font-bold text-foreground tracking-tight">
