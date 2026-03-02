@@ -40,7 +40,7 @@ const Navbar = () => {
 
         <button
           onClick={() => setLang(lang === "es" ? "en" : "es")}
-          className="flex items-center gap-1.5 text-xs font-body tracking-widest uppercase border border-primary/40 px-3 py-1.5 rounded-sm text-primary hover:bg-primary/10 transition-colors duration-300"
+          className="inline-flex items-center gap-1.5 border border-border px-4 py-1.5 text-xs font-body tracking-widest uppercase text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-all duration-300 rounded-sm"
           aria-label="Switch language"
         >
           <Globe className="w-3.5 h-3.5" strokeWidth={1.5} />
