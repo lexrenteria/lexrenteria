@@ -12,8 +12,40 @@ const Index = () => {
   return (
     <HelmetProvider>
       <SEOHead />
-      <SchemaMarkup schemas={[]} />
-      <SchemaMarkup schemas={[]} />
+      <SchemaMarkup
+        schemas={[
+          {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Lex Rentería — Filmmaker",
+            "url": "https://lexrenteria.lovable.app",
+            "description": "Portfolio of Lex Rentería, queer filmmaker from Guadalajara, Mexico. Exploring identity, memory, and belonging through cinema.",
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Lex Rentería",
+            "url": "https://lexrenteria.lovable.app",
+            "image": "https://image.tmdb.org/t/p/original/qQ1Ds95SE3aeeywPNznETDwTfhR.jpg",
+            "jobTitle": "Film Director",
+            "description": "Queer filmmaker from Guadalajara, Mexico. Director and screenwriter exploring identity, memory, and belonging.",
+            "knowsAbout": ["Film Direction", "Screenwriting", "LGBTQ+ Cinema", "Independent Film"],
+            "sameAs": [
+              "https://www.imdb.com/name/nm14399129/",
+              "https://letterboxd.com/lexrenteria/",
+              "https://www.instagram.com/lexrenteria/"
+            ],
+            "nationality": {
+              "@type": "Country",
+              "name": "Mexico"
+            },
+            "worksFor": {
+              "@type": "Organization",
+              "name": "Kauyi"
+            }
+          },
+        ]}
+      />
 
       <Navbar />
       <main className="bg-cinematic min-h-screen">
