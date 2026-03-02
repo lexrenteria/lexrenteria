@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import SEOHead from "@/components/SEOHead";
+import SchemaMarkup from "@/components/SchemaMarkup";
 import Navbar from "@/components/Navbar";
 import FooterSection from "@/components/FooterSection";
 import ProjectGallery from "@/components/ProjectGallery";
@@ -8,6 +9,12 @@ import { useI18n } from "@/lib/i18n";
 import { projects } from "@/lib/projects";
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
+
+const tmdbPosters: Record<string, string> = {
+  "purpura-neon": "https://image.tmdb.org/t/p/original/vEtrfW8FC6L0VZmDUMfPtcaBJhq.jpg",
+  "agaves-al-alba": "https://image.tmdb.org/t/p/original/rScJM707GozCiyT42qwkJnlMazh.jpg",
+  "el-ultimo-videoclub": "https://image.tmdb.org/t/p/original/vGMudsGPzYWKCY08tAnBo8nVEtb.jpg",
+};
 
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -39,6 +46,35 @@ const ProjectDetail = () => {
       <SEOHead
         title={`${project.title} — Lex Rentería`}
         description={project.synopsis[lang].slice(0, 155)}
+      />
+      <SchemaMarkup
+        schemas={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Movie",
+            "name": project.title,
+            "description": project.synopsis.en.slice(0, 300),
+            "image": tmdbPosters[project.slug] || project.poster,
+            "dateCreated": project.year === "TBA" ? undefined : project.year,
+            "genre": project.genre.split(", "),
+            "inLanguage": project.language,
+            "countryOfOrigin": {
+              "@type": "Country",
+              "name": project.country,
+            },
+            "director": {
+              "@type": "Person",
+              "name": "Lex Rentería",
+              "url": "https://lexrenteria.lovable.app",
+              "image": "https://image.tmdb.org/t/p/original/qQ1Ds95SE3aeeywPNznETDwTfhR.jpg",
+            },
+            "productionCompany": {
+              "@type": "Organization",
+              "name": "Kauyi",
+            },
+            ...(project.duration ? { "duration": `PT${project.duration.replace(" min", "M")}` } : {}),
+          },
+        ]}
       />
       <Navbar />
       <main
