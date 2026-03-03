@@ -20,28 +20,41 @@ const XIcon = () => (
   </svg>
 );
 
-const IMDbIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-7 h-7 fill-current" aria-hidden="true">
-    <path d="M14.31 9.588v.005c-.077-.048-.227-.07-.42-.07v4.815c.27 0 .44-.06.5-.165.062-.104.093-.39.093-.81v-2.953c0-.32-.013-.53-.04-.63-.025-.1-.068-.16-.133-.192zM22.416 0H1.584A1.584 1.584 0 000 1.584v20.832A1.584 1.584 0 001.584 24h20.832A1.584 1.584 0 0024 22.416V1.584A1.584 1.584 0 0022.416 0zM4.8 15.458H3.034V8.235H4.8v7.223zM9.59 15.458H7.932l-.07-.734c-.04.248-.13.47-.282.665a.82.82 0 01-.665.267c-.372 0-.627-.177-.762-.533-.098-.258-.147-.683-.147-1.278V11.07c0-.594.06-1.013.178-1.254.118-.24.357-.36.718-.36.27 0 .48.083.63.25.148.167.248.393.3.678l.015-.668h1.46v5.742h.015zm4.98-2.135c0 .617-.03 1.065-.09 1.338-.06.273-.188.508-.383.702-.194.195-.418.327-.673.395-.254.07-.624.103-1.108.103H10.66V8.235h1.575c.5 0 .863.028 1.09.082.228.055.42.152.58.29.16.14.273.313.336.518.063.206.095.566.095 1.082v3.116h.234zm4.465.59c0 .482-.013.8-.04.955-.026.154-.09.296-.192.424a1.02 1.02 0 01-.413.318c-.17.076-.37.115-.6.115-.18 0-.34-.028-.48-.083a.88.88 0 01-.34-.248l-.097.158h-1.5V8.235h1.575v2.434c.093-.142.2-.254.322-.336a.78.78 0 01.448-.126c.27 0 .49.062.655.186.165.124.27.296.318.514.047.218.07.584.07 1.098v1.907h.274z" />
-  </svg>
-);
 
-const LetterboxdIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-7 h-7 fill-current" aria-hidden="true">
-    <path d="M8.224 14.352a4.773 4.773 0 010-4.704l-1.08-.576A6.015 6.015 0 006.4 12c0 1.056.272 2.048.752 2.912l1.072-.56zm3.2 2.544a4.8 4.8 0 01-3.2-1.216L7.2 16.8A6.336 6.336 0 0011.424 18.4v-1.504zm0-9.792V5.6A6.336 6.336 0 007.2 7.2l1.024 1.12a4.8 4.8 0 013.2-1.216zm1.152 0a4.8 4.8 0 013.2 1.216L16.8 7.2A6.336 6.336 0 0012.576 5.6v1.504zm0 9.792V18.4A6.336 6.336 0 0016.8 16.8l-1.024-1.12a4.8 4.8 0 01-3.2 1.216zm3.2-2.544l1.072.56A6.015 6.015 0 0017.6 12c0-1.056-.272-2.048-.752-2.912l-1.072.56a4.773 4.773 0 010 4.704zM12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0z" />
-  </svg>
-);
 
 const FooterSection = () => {
   const { lang, t } = useI18n();
   const { mailto, display } = useObfuscatedEmail();
 
-  const socials = [
+  const mainSocials = [
     { label: "Instagram", href: "https://instagram.com/lexrenteria", icon: <Instagram className="w-7 h-7" /> },
     { label: "X", href: "https://x.com/lexrenteria", icon: <XIcon /> },
     { label: "Facebook", href: "https://facebook.com/lexrenteria", icon: <Facebook className="w-7 h-7" /> },
-    { label: "IMDb", href: "https://www.imdb.com/name/nm14592548/", icon: <IMDbIcon /> },
-    { label: "Letterboxd", href: "https://letterboxd.com/lexrenteria/", icon: <LetterboxdIcon /> },
+  ];
+
+  const secondarySocials = [
+    {
+      label: "IMDb",
+      href: "https://www.imdb.com/name/nm14592548/",
+      icon: (
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/960px-IMDB_Logo_2016.svg.png?_=20200406194337"
+          alt="IMDb"
+          className="h-4 w-auto"
+        />
+      ),
+    },
+    {
+      label: "Letterboxd",
+      href: "https://letterboxd.com/lexrenteria/",
+      icon: (
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Letterboxd-Logo-H-Pos-RGB.svg/640px-Letterboxd-Logo-H-Pos-RGB.svg.png"
+          alt="Letterboxd"
+          className="h-3 w-auto"
+        />
+      ),
+    },
   ];
 
   return (
@@ -84,21 +97,36 @@ const FooterSection = () => {
             : "Have a project in mind? Let's collaborate."}
         </motion.p>
 
-        {/* Email CTA */}
-        <motion.a
-          href={mailto}
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="group flex items-center gap-3 border border-primary/40 bg-primary/10 px-8 sm:px-10 py-4 rounded-sm hover:bg-primary/20 hover:shadow-[0_0_30px_hsl(var(--primary)/0.15)] transition-all duration-500 mb-14"
-          aria-label="Email"
+        {/* Contact Actions */}
+        <div
+          className="flex flex-col sm:flex-row gap-4 mb-14 w-full justify-center"
         >
-          <Mail className="w-5 h-5 text-primary" strokeWidth={1.5} />
-          <span className="font-heading text-lg sm:text-xl italic text-primary tracking-wide">
-            {display}
-          </span>
-        </motion.a>
+          {/* Instagram CTA (Primary) */}
+          <a
+            href="https://instagram.com/lexrenteria"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center justify-center gap-3 bg-primary px-8 sm:px-10 py-4 rounded-sm hover:bg-primary/90 hover:shadow-[0_0_30px_hsl(var(--primary)/0.3)] transition-all duration-500"
+            aria-label="Send a DM in Instagram"
+          >
+            <Instagram className="w-5 h-5 text-primary-foreground" strokeWidth={1.5} />
+            <span className="font-heading text-lg sm:text-xl italic text-primary-foreground tracking-wide">
+              Send a DM in Instagram
+            </span>
+          </a>
+
+          {/* Email CTA (Secondary) */}
+          <a
+            href={mailto}
+            className="group flex items-center justify-center gap-3 border border-primary/40 bg-primary/10 px-8 sm:px-10 py-4 rounded-sm hover:bg-primary/20 hover:shadow-[0_0_30px_hsl(var(--primary)/0.15)] transition-all duration-500"
+            aria-label="Email"
+          >
+            <Mail className="w-5 h-5 text-primary" strokeWidth={1.5} />
+            <span className="font-heading text-lg sm:text-xl italic text-primary tracking-wide">
+              {display}
+            </span>
+          </a>
+        </div>
 
         {/* Divider */}
         <div className="w-12 h-px bg-border mb-10" />
@@ -109,21 +137,40 @@ const FooterSection = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="flex gap-6 sm:gap-8 mb-16"
+          className="flex flex-col items-center gap-8 mb-16"
           aria-label="Social media"
         >
-          {socials.map((s) => (
-            <a
-              key={s.label}
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors duration-300"
-              aria-label={s.label}
-            >
-              {s.icon}
-            </a>
-          ))}
+          {/* Main Socials - White Circles */}
+          <div className="flex gap-4 sm:gap-6">
+            {mainSocials.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full border border-white/20 bg-white/5 hover:bg-white/20 hover:border-white hover:scale-110 text-muted-foreground hover:text-white transition-all duration-300"
+                aria-label={s.label}
+              >
+                {s.icon}
+              </a>
+            ))}
+          </div>
+
+          {/* Secondary Socials - Logos */}
+          <div className="flex gap-6 sm:gap-8 items-center">
+            {secondarySocials.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-opacity duration-300 opacity-80 hover:opacity-100"
+                aria-label={s.label}
+              >
+                {s.icon}
+              </a>
+            ))}
+          </div>
         </motion.nav>
 
         {/* Copyright */}
