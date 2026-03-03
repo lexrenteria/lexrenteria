@@ -5,7 +5,32 @@ import { projects } from "@/lib/projects";
 import portrait from "@/assets/portrait-lex.png";
 import { Link } from "react-router-dom";
 
-const stills = projects.map((p) => p.still);
+/* Gather every candidate image from projects (stills + gallery) */
+const allProjectImages: string[] = [];
+projects.forEach((p) => {
+  allProjectImages.push(p.still);
+  if (p.gallery) allProjectImages.push(...p.gallery);
+});
+
+/* Shuffle an array (Fisher-Yates) */
+function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+/* Known-horizontal stills used as initial fallback (randomized) */
+const stills = shuffle(projects.map((p) => p.still));
+
+/** Return a small version of the URL for fast dimension probing */
+function getProbeUrl(url: string): string {
+  if (url.includes("image.tmdb.org")) return url.replace("/original/", "/w300/");
+  return url;
+}
+
 const INTERVAL = 6000;
 
 /** Replace {agaves}, {purpura}, {videoclub} tokens with <Link> elements */
@@ -42,11 +67,48 @@ const renderBioWithLinks = (text: string) => {
 const HeroSection = () => {
   const { lang, t } = useI18n();
   const [idx, setIdx] = useState(0);
+  const [images, setImages] = useState<string[]>(stills);
 
+  /* Detect horizontal images from all project images */
   useEffect(() => {
-    const timer = setInterval(() => setIdx((prev) => (prev + 1) % stills.length), INTERVAL);
-    return () => clearInterval(timer);
+    let cancelled = false;
+    const detect = async () => {
+      const results = await Promise.allSettled(
+        allProjectImages.map(
+          (src) =>
+            new Promise<string>((resolve, reject) => {
+              const img = new Image();
+              img.onload = () =>
+                img.naturalWidth > img.naturalHeight ? resolve(src) : reject();
+              img.onerror = () => reject();
+              img.src = getProbeUrl(src);
+            }),
+        ),
+      );
+      if (cancelled) return;
+      const horizontal = results
+        .filter(
+          (r): r is PromiseFulfilledResult<string> => r.status === "fulfilled",
+        )
+        .map((r) => r.value);
+      if (horizontal.length > 0) {
+        setIdx(0);
+        setImages(shuffle(horizontal));
+      }
+    };
+    detect();
+    return () => { cancelled = true; };
   }, []);
+
+  /* Auto-rotate through images */
+  useEffect(() => {
+    if (images.length === 0) return;
+    const timer = setInterval(
+      () => setIdx((prev) => (prev + 1) % images.length),
+      INTERVAL,
+    );
+    return () => clearInterval(timer);
+  }, [images.length]);
 
   return (
     <section
@@ -63,7 +125,7 @@ const HeroSection = () => {
           exit={{ opacity: 0 }}
           transition={{ duration: 2, ease: "easeInOut" }}
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${stills[idx]})` }}
+          style={{ backgroundImage: `url(${images[idx]})` }}
         />
       </AnimatePresence>
 
