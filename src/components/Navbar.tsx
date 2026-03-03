@@ -66,37 +66,48 @@ const Navbar = () => {
       {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.nav
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="md:hidden overflow-hidden border-t border-border/30"
-            style={{ backgroundColor: "hsl(0 0% 2% / 0.9)" }}
-            aria-label="Mobile navigation"
-          >
-            <div className="flex flex-col items-center gap-1 py-4 px-6">
-              {links.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="w-full text-center py-3 text-sm font-body tracking-widest uppercase text-muted-foreground hover:text-primary transition-colors duration-300"
+          <>
+            {/* Backdrop dim */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 top-16 bg-background/60 md:hidden z-40"
+              onClick={() => setMobileOpen(false)}
+            />
+            <motion.nav
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="relative z-50 md:hidden overflow-hidden border-t border-border/30"
+              style={{ backgroundColor: "hsl(0 0% 2% / 0.95)" }}
+              aria-label="Mobile navigation"
+            >
+              <div className="flex flex-col items-center gap-1 py-4 px-6">
+                {links.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="w-full text-center py-3 text-sm font-body tracking-widest uppercase text-muted-foreground hover:text-primary transition-colors duration-300"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+                <div className="w-12 h-px bg-border my-2" />
+                <button
+                  onClick={() => { setLang(lang === "es" ? "en" : "es"); setMobileOpen(false); }}
+                  className="inline-flex items-center gap-1.5 py-3 text-sm font-body tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors duration-300"
+                  aria-label="Switch language"
                 >
-                  {link.label}
-                </a>
-              ))}
-              <div className="w-12 h-px bg-border my-2" />
-              <button
-                onClick={() => { setLang(lang === "es" ? "en" : "es"); setMobileOpen(false); }}
-                className="inline-flex items-center gap-1.5 py-3 text-sm font-body tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors duration-300"
-                aria-label="Switch language"
-              >
-                <Globe className="w-3.5 h-3.5" strokeWidth={1.5} />
-                {lang === "es" ? "English" : "Español"}
-              </button>
-            </div>
-          </motion.nav>
+                  <Globe className="w-3.5 h-3.5" strokeWidth={1.5} />
+                  {lang === "es" ? "English" : "Español"}
+                </button>
+              </div>
+            </motion.nav>
+          </>
         )}
       </AnimatePresence>
     </motion.header>
