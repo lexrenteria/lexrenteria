@@ -23,7 +23,7 @@ const ProjectsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-16 text-center"
+          className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-16 text-center italic"
         >
           {t.projects.title[lang]}
         </motion.h2>

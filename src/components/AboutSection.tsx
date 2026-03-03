@@ -63,7 +63,7 @@ const AboutSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <h2 className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-10">
+          <h2 className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-10 text-center italic">
             {t.about.title[lang]}
           </h2>
           <div className="space-y-6 text-muted-foreground font-body text-lg leading-relaxed">
