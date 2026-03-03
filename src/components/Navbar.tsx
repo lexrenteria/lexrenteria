@@ -42,9 +42,10 @@ const Navbar = () => {
         </nav>
 
         <div className="flex items-center gap-3">
+          {/* Language switch - desktop only */}
           <button
             onClick={() => setLang(lang === "es" ? "en" : "es")}
-            className="inline-flex items-center gap-1.5 border border-border px-4 py-1.5 text-xs font-body tracking-widest uppercase text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-all duration-300 rounded-sm"
+            className="hidden md:inline-flex items-center gap-1.5 border border-border px-4 py-1.5 text-xs font-body tracking-widest uppercase text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-all duration-300 rounded-sm"
             aria-label="Switch language"
           >
             <Globe className="w-3.5 h-3.5" strokeWidth={1.5} />
@@ -85,6 +86,15 @@ const Navbar = () => {
                   {link.label}
                 </a>
               ))}
+              <div className="w-12 h-px bg-border my-2" />
+              <button
+                onClick={() => { setLang(lang === "es" ? "en" : "es"); setMobileOpen(false); }}
+                className="inline-flex items-center gap-1.5 py-3 text-sm font-body tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors duration-300"
+                aria-label="Switch language"
+              >
+                <Globe className="w-3.5 h-3.5" strokeWidth={1.5} />
+                {lang === "es" ? "English" : "Español"}
+              </button>
             </div>
           </motion.nav>
         )}
