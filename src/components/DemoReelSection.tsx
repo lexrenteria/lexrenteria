@@ -12,7 +12,7 @@ const DemoReelSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="font-heading text-3xl sm:text-4xl font-bold text-foreground mb-10 text-center"
+          className="font-heading text-3xl sm:text-4xl font-bold text-foreground mb-10 text-center italic"
         >
           {t.reel.title[lang]}
         </motion.h2>
