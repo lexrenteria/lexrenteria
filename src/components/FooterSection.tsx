@@ -106,25 +106,21 @@ const FooterSection = () => {
             href="https://instagram.com/lexrenteria"
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center justify-center gap-3 bg-primary px-8 sm:px-10 py-4 rounded-sm hover:bg-primary/90 hover:shadow-[0_0_30px_hsl(var(--primary)/0.3)] transition-all duration-500"
+            className="inline-flex items-center justify-center gap-3 border border-primary/40 bg-primary/10 px-8 sm:px-10 py-3 rounded-sm text-sm font-body tracking-widest uppercase text-primary hover:bg-primary/20 transition-all duration-300"
             aria-label="Send a DM in Instagram"
           >
-            <Instagram className="w-5 h-5 text-primary-foreground" strokeWidth={1.5} />
-            <span className="font-heading text-lg sm:text-xl italic text-primary-foreground tracking-wide">
-              Send a DM in Instagram
-            </span>
+            <Instagram className="w-4 h-4" strokeWidth={1.5} />
+            {lang === "es" ? "Enviar DM en Instagram" : "Send a DM on Instagram"}
           </a>
 
           {/* Email CTA (Secondary) */}
           <a
             href={mailto}
-            className="group flex items-center justify-center gap-3 border border-primary/40 bg-primary/10 px-8 sm:px-10 py-4 rounded-sm hover:bg-primary/20 hover:shadow-[0_0_30px_hsl(var(--primary)/0.15)] transition-all duration-500"
+            className="inline-flex items-center justify-center gap-3 border border-border px-8 sm:px-10 py-3 rounded-sm text-sm font-body tracking-widest uppercase text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-all duration-300"
             aria-label="Email"
           >
-            <Mail className="w-5 h-5 text-primary" strokeWidth={1.5} />
-            <span className="font-heading text-lg sm:text-xl italic text-primary tracking-wide">
-              {display}
-            </span>
+            <Mail className="w-4 h-4" strokeWidth={1.5} />
+            {display}
           </a>
         </div>
 
