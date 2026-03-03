@@ -99,7 +99,7 @@ const FooterSection = () => {
 
         {/* Contact Actions */}
         <div
-          className="flex flex-col sm:flex-row gap-4 mb-14 w-full justify-center"
+          className="flex flex-col gap-4 mb-14 w-full max-w-md mx-auto"
         >
           {/* Instagram CTA (Primary) */}
           <a
