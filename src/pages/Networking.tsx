@@ -9,7 +9,7 @@ TITLE:Cineasta
 TEL;TYPE=CELL:+523316725534
 EMAIL:avrenteria@gmail.com
 URL:https://lexrenteria.com
-NOTE:Instagram: @lexrenteria
+URL:https://instagram.com/lexrenteria
 END:VCARD`;
 
 const Networking = () => {
