@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
+import { useEffect } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import SEOHead from "@/components/SEOHead";
-import SchemaMarkup from "@/components/SchemaMarkup";
 import Navbar from "@/components/Navbar";
 import FooterSection from "@/components/FooterSection";
 import ProjectGallery from "@/components/ProjectGallery";
@@ -16,10 +16,64 @@ const tmdbPosters: Record<string, string> = {
   "el-ultimo-videoclub": "https://image.tmdb.org/t/p/original/vGMudsGPzYWKCY08tAnBo8nVEtb.jpg",
 };
 
+const movieSchemas: Record<string, object> = {
+  "el-ultimo-videoclub": {
+    "@context": "https://schema.org",
+    "@type": "Movie",
+    "name": "El último videoclub",
+    "url": "https://lexrenteria.com/projects/el-ultimo-videoclub",
+    "image": "https://image.tmdb.org/t/p/original/vGMudsGPzYWKCY08tAnBo8nVEtb.jpg",
+    "director": { "@type": "Person", "name": "Lex Rentería", "url": "https://lexrenteria.com" },
+    "genre": "Largometraje",
+    "creativeWorkStatus": "In production",
+    "abstract": "Luis intenta salvar el último videoclub de la ciudad para rescatar una memoria familiar borrada y evitar que su propia historia sea consumida por el olvido."
+  },
+  "purpura-neon": {
+    "@context": "https://schema.org",
+    "@type": "Movie",
+    "name": "Púrpura Neón",
+    "url": "https://lexrenteria.com/projects/purpura-neon",
+    "image": "https://image.tmdb.org/t/p/original/vEtrfW8FC6L0VZmDUMfPtcaBJhq.jpg",
+    "director": { "@type": "Person", "name": "Lex Rentería", "url": "https://lexrenteria.com" },
+    "datePublished": "2024",
+    "duration": "PT9M",
+    "genre": ["Cortometraje", "Drama", "LGBTQ+"],
+    "abstract": "Estrella, una drag queen emergente, enfrenta una noche decisiva llena de ansiedad y desafíos personales, mientras busca la aceptación y el éxito en el vibrante escenario drag de Guadalajara."
+  },
+  "agaves-al-alba": {
+    "@context": "https://schema.org",
+    "@type": "Movie",
+    "name": "Agaves al alba",
+    "alternateName": "Agave Echoes",
+    "url": "https://lexrenteria.com/projects/agaves-al-alba",
+    "image": "https://image.tmdb.org/t/p/original/rScJM707GozCiyT42qwkJnlMazh.jpg",
+    "director": { "@type": "Person", "name": "Lex Rentería", "url": "https://lexrenteria.com" },
+    "datePublished": "2024",
+    "duration": "PT12M",
+    "genre": ["Cortometraje", "Drama", "Romance", "LGBTQ+"],
+    "abstract": "Bajo el amanecer de los campos agaveros de Jalisco, Alejandro y Miguel, dos amigos con un vínculo especial, se enfrentan a una despedida inevitable. Entre recuerdos, sus emociones se intensifican, desafiando los límites de su amistad.",
+    "locationCreated": { "@type": "Place", "name": "Paisaje Agavero de Tequila, Jalisco" }
+  },
+};
+
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const { lang, t } = useI18n();
   const project = projects.find((p) => p.slug === slug);
+
+  // Inject/cleanup JSON-LD schema in <head> per slug
+  useEffect(() => {
+    const schema = slug ? movieSchemas[slug] : null;
+    if (!schema) return;
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.textContent = JSON.stringify(schema);
+    script.id = `movie-schema-${slug}`;
+    document.head.appendChild(script);
+    return () => {
+      script.remove();
+    };
+  }, [slug]);
 
   if (!project) {
     return (
@@ -46,35 +100,6 @@ const ProjectDetail = () => {
       <SEOHead
         title={`${project.title} — Lex Rentería`}
         description={project.synopsis[lang].slice(0, 155)}
-      />
-      <SchemaMarkup
-        schemas={[
-          {
-            "@context": "https://schema.org",
-            "@type": "Movie",
-            "name": project.title,
-            "description": project.synopsis.en.slice(0, 300),
-            "image": tmdbPosters[project.slug] || project.poster,
-            "dateCreated": project.year === "TBA" ? undefined : project.year,
-            "genre": project.genre.split(", "),
-            "inLanguage": project.language,
-            "countryOfOrigin": {
-              "@type": "Country",
-              "name": project.country,
-            },
-            "director": {
-              "@type": "Person",
-              "name": "Lex Rentería",
-              "url": "https://lexrenteria.lovable.app",
-              "image": "https://image.tmdb.org/t/p/original/qQ1Ds95SE3aeeywPNznETDwTfhR.jpg",
-            },
-            "productionCompany": {
-              "@type": "Organization",
-              "name": "Kauyi",
-            },
-            ...(project.duration ? { "duration": `PT${project.duration.replace(" min", "M")}` } : {}),
-          },
-        ]}
       />
       <Navbar />
       <main
