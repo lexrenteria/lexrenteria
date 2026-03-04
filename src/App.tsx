@@ -8,6 +8,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import Index from "./pages/Index";
 import ProjectDetail from "./pages/ProjectDetail";
 import NotFound from "./pages/NotFound";
+import Networking from "./pages/Networking";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/projects/:slug" element={<ProjectDetail />} />
+            <Route path="/networking" element={<Networking />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
