@@ -102,7 +102,7 @@ const Networking = () => {
         <motion.div
           key={idx}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.7 }}
+          animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 2, ease: "easeInOut" }}
           className="absolute inset-x-0 top-0 h-1/3 bg-cover bg-center bg-no-repeat"
