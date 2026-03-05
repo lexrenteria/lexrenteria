@@ -51,7 +51,7 @@ const Networking = () => {
         <motion.div
           key={idx}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.5 }}
+          animate={{ opacity: 0.7 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 2, ease: "easeInOut" }}
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -60,8 +60,8 @@ const Networking = () => {
       </AnimatePresence>
 
       {/* Overlays */}
-      <div className="absolute inset-0 bg-background/60" />
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/80" />
+      <div className="absolute inset-0 bg-background/30" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-background/50" />
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center">
