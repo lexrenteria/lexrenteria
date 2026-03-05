@@ -3,7 +3,14 @@ import { QRCodeSVG } from "qrcode.react";
 import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "@/lib/projects";
 
-/* Gather horizontal stills */
+/* Gather every candidate image from projects (stills + gallery) */
+const allProjectImages: string[] = [];
+projects.forEach((p) => {
+  allProjectImages.push(p.still);
+  if (p.gallery) allProjectImages.push(...p.gallery);
+});
+
+/* Shuffle an array (Fisher-Yates) */
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -13,7 +20,15 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
-const stills = shuffle(projects.map((p) => p.still));
+/* Fallback stills */
+const fallbackStills = shuffle(projects.map((p) => p.still));
+
+/** Return a small version of the URL for fast dimension probing */
+function getProbeUrl(url: string): string {
+  if (url.includes("image.tmdb.org")) return url.replace("/original/", "/w300/");
+  return url;
+}
+
 const INTERVAL = 6000;
 
 const VCARD = `BEGIN:VCARD
