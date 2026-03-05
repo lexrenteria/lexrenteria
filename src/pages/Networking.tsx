@@ -44,6 +44,7 @@ END:VCARD`;
 
 const Networking = () => {
   const [idx, setIdx] = useState(0);
+  const [images, setImages] = useState<string[]>(fallbackStills);
 
   useEffect(() => {
     const meta = document.createElement("meta");
@@ -53,11 +54,46 @@ const Networking = () => {
     return () => { meta.remove(); };
   }, []);
 
+  /* Detect horizontal images from all project images */
   useEffect(() => {
-    if (stills.length === 0) return;
-    const timer = setInterval(() => setIdx((prev) => (prev + 1) % stills.length), INTERVAL);
-    return () => clearInterval(timer);
+    let cancelled = false;
+    const detect = async () => {
+      const results = await Promise.allSettled(
+        allProjectImages.map(
+          (src) =>
+            new Promise<string>((resolve, reject) => {
+              const img = new Image();
+              img.onload = () =>
+                img.naturalWidth > img.naturalHeight ? resolve(src) : reject();
+              img.onerror = () => reject();
+              img.src = getProbeUrl(src);
+            }),
+        ),
+      );
+      if (cancelled) return;
+      const horizontal = results
+        .filter(
+          (r): r is PromiseFulfilledResult<string> => r.status === "fulfilled",
+        )
+        .map((r) => r.value);
+      if (horizontal.length > 0) {
+        setIdx(0);
+        setImages(shuffle(horizontal));
+      }
+    };
+    detect();
+    return () => { cancelled = true; };
   }, []);
+
+  /* Auto-rotate through images */
+  useEffect(() => {
+    if (images.length === 0) return;
+    const timer = setInterval(
+      () => setIdx((prev) => (prev + 1) % images.length),
+      INTERVAL,
+    );
+    return () => clearInterval(timer);
+  }, [images.length]);
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center px-6 py-16 overflow-hidden">
