@@ -1,5 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
+import { motion, AnimatePresence } from "framer-motion";
+import { projects } from "@/lib/projects";
+
+/* Gather horizontal stills */
+function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+const stills = shuffle(projects.map((p) => p.still));
+const INTERVAL = 6000;
 
 const VCARD = `BEGIN:VCARD
 VERSION:3.0
@@ -13,38 +28,64 @@ URL:https://instagram.com/lexrenteria
 END:VCARD`;
 
 const Networking = () => {
+  const [idx, setIdx] = useState(0);
+
   useEffect(() => {
     const meta = document.createElement("meta");
     meta.name = "robots";
     meta.content = "noindex, nofollow";
     document.head.appendChild(meta);
-    return () => {
-      meta.remove();
-    };
+    return () => { meta.remove(); };
+  }, []);
+
+  useEffect(() => {
+    if (stills.length === 0) return;
+    const timer = setInterval(() => setIdx((prev) => (prev + 1) % stills.length), INTERVAL);
+    return () => clearInterval(timer);
   }, []);
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center px-6 py-16">
-      <h1 className="font-heading text-2xl sm:text-3xl font-bold italic text-foreground mb-2">
-        Lex Rentería
-      </h1>
-      <p className="font-body text-sm text-muted-foreground tracking-widest uppercase mb-10">
-        Cineasta
-      </p>
-
-      <div className="bg-white p-5 rounded-lg shadow-lg">
-        <QRCodeSVG
-          value={VCARD}
-          size={260}
-          level="M"
-          bgColor="#ffffff"
-          fgColor="#000000"
+    <div className="relative min-h-screen flex flex-col items-center justify-center px-6 py-16 overflow-hidden">
+      {/* Rotating background stills */}
+      <AnimatePresence mode="popLayout">
+        <motion.div
+          key={idx}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.5 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 2, ease: "easeInOut" }}
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${stills[idx]})` }}
         />
-      </div>
+      </AnimatePresence>
 
-      <p className="font-body text-xs text-muted-foreground mt-8 text-center max-w-xs">
-        Escanea para guardar el contacto
-      </p>
+      {/* Overlays */}
+      <div className="absolute inset-0 bg-background/60" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/80" />
+
+      {/* Content */}
+      <div className="relative z-10 flex flex-col items-center">
+        <h1 className="font-heading text-2xl sm:text-3xl font-bold italic text-foreground mb-2">
+          Lex Rentería
+        </h1>
+        <p className="font-body text-sm text-muted-foreground tracking-widest uppercase mb-10">
+          Cineasta
+        </p>
+
+        <div className="bg-white p-5 rounded-lg shadow-lg">
+          <QRCodeSVG
+            value={VCARD}
+            size={260}
+            level="M"
+            bgColor="#ffffff"
+            fgColor="#000000"
+          />
+        </div>
+
+        <p className="font-body text-xs text-muted-foreground mt-8 text-center max-w-xs">
+          Escanea para guardar el contacto
+        </p>
+      </div>
     </div>
   );
 };
