@@ -46,7 +46,7 @@ const Networking = () => {
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center px-6 py-16 overflow-hidden">
-      {/* Rotating background stills */}
+      {/* Rotating background stills — top half only */}
       <AnimatePresence mode="popLayout">
         <motion.div
           key={idx}
@@ -54,14 +54,14 @@ const Networking = () => {
           animate={{ opacity: 0.7 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 2, ease: "easeInOut" }}
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-x-0 top-0 h-1/2 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${stills[idx]})` }}
         />
       </AnimatePresence>
 
-      {/* Overlays */}
-      <div className="absolute inset-0 bg-background/30" />
-      <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-background/50" />
+      {/* Overlays — top half */}
+      <div className="absolute inset-x-0 top-0 h-1/2 bg-background/30" />
+      <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-background/40 via-transparent to-background" />
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center">
