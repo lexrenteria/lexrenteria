@@ -18,14 +18,14 @@ const Index = () => {
             "@context": "https://schema.org",
             "@type": "WebSite",
             "name": "Lex Rentería — Filmmaker",
-            "url": "https://lexrenteria.lovable.app",
+            "url": "https://lexrenteria.com",
             "description": "Portfolio of Lex Rentería, queer filmmaker from Guadalajara, Mexico. Exploring identity, memory, and belonging through cinema.",
           },
           {
             "@context": "https://schema.org",
             "@type": "Person",
             "name": "Lex Rentería",
-            "url": "https://lexrenteria.lovable.app",
+            "url": "https://lexrenteria.com",
             "image": "https://image.tmdb.org/t/p/original/qQ1Ds95SE3aeeywPNznETDwTfhR.jpg",
             "jobTitle": "Film Director",
             "description": "Queer filmmaker from Guadalajara, Mexico. Director and screenwriter exploring identity, memory, and belonging.",
@@ -44,11 +44,25 @@ const Index = () => {
               "name": "Kauyi"
             }
           },
+          {
+            "@context": "https://schema.org",
+            "@type": "VideoObject",
+            "name": "Demo Reel — Lex Rentería",
+            "description": "Demo reel showcasing the cinematic work of Lex Rentería, queer filmmaker from Guadalajara, Mexico.",
+            "thumbnailUrl": "https://img.youtube.com/vi/3irpN6hikLo/maxresdefault.jpg",
+            "uploadDate": "2024-01-01",
+            "contentUrl": "https://www.youtube.com/watch?v=3irpN6hikLo",
+            "embedUrl": "https://www.youtube.com/embed/3irpN6hikLo",
+            "publisher": {
+              "@type": "Person",
+              "name": "Lex Rentería"
+            }
+          },
         ]}
       />
 
       <Navbar />
-      <main className="bg-cinematic min-h-screen">
+      <main id="main-content" className="bg-cinematic min-h-screen">
         <HeroSection />
         <div className="border-t border-border" />
         <AboutSection />
