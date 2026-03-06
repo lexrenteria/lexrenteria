@@ -5,7 +5,10 @@ import { motion } from "framer-motion";
 
 /** Obfuscated email — assembled at runtime to prevent scraping */
 const useObfuscatedEmail = () => {
-  const [email, setEmail] = useState({ mailto: "#", display: "" });
+  const [email, setEmail] = useState<{ mailto: string; display: string; encodedDisplay?: string }>({ 
+    mailto: "#", 
+    display: "" 
+  });
   
   useEffect(() => {
     // Construct email pieces separately to avoid plain-text storage
@@ -22,7 +25,6 @@ const useObfuscatedEmail = () => {
     setEmail({ 
       mailto: `mailto:${fullEmail}`,
       display: fullEmail,
-      // Fallback encoded version for security
       encodedDisplay 
     });
   }, []);
