@@ -48,7 +48,7 @@ const Index = () => {
       />
 
       <Navbar />
-      <main className="bg-cinematic min-h-screen">
+      <main id="main-content" className="bg-cinematic min-h-screen">
         <HeroSection />
         <div className="border-t border-border" />
         <AboutSection />
