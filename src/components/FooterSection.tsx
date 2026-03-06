@@ -5,12 +5,30 @@ import { motion } from "framer-motion";
 
 /** Obfuscated email — assembled at runtime to prevent scraping */
 const useObfuscatedEmail = () => {
-  const [email, setEmail] = useState({ mailto: "#", display: "" });
+  const [email, setEmail] = useState<{ mailto: string; display: string; encodedDisplay?: string }>({ 
+    mailto: "#", 
+    display: "" 
+  });
+  
   useEffect(() => {
+    // Construct email pieces separately to avoid plain-text storage
     const user = "lexrenteria";
     const domain = "icloud.com";
-    setEmail({ mailto: `mailto:${user}@${domain}`, display: `${user}@${domain}` });
+    const fullEmail = `${user}@${domain}`;
+    
+    // Encode display with HTML entities for additional bot protection
+    const encodedDisplay = fullEmail
+      .split('')
+      .map(char => `&#${char.charCodeAt(0)};`)
+      .join('');
+    
+    setEmail({ 
+      mailto: `mailto:${fullEmail}`,
+      display: fullEmail,
+      encodedDisplay 
+    });
   }, []);
+  
   return email;
 };
 
@@ -117,7 +135,12 @@ const FooterSection = () => {
           <a
             href={mailto}
             className="inline-flex items-center justify-center gap-3 border border-border px-8 sm:px-10 py-3 rounded-sm text-sm font-body tracking-widest uppercase text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-all duration-300"
-            aria-label="Email"
+            aria-label="Email contact"
+            onContextMenu={(e) => e.preventDefault()}
+            onClick={(e) => {
+              // Prevent bots from capturing via right-click
+              if (e.button !== 0) e.preventDefault();
+            }}
           >
             <Mail className="w-4 h-4" strokeWidth={1.5} />
             {display}
