@@ -6,11 +6,27 @@ import { motion } from "framer-motion";
 /** Obfuscated email — assembled at runtime to prevent scraping */
 const useObfuscatedEmail = () => {
   const [email, setEmail] = useState({ mailto: "#", display: "" });
+  
   useEffect(() => {
+    // Construct email pieces separately to avoid plain-text storage
     const user = "lexrenteria";
     const domain = "icloud.com";
-    setEmail({ mailto: `mailto:${user}@${domain}`, display: `${user}@${domain}` });
+    const fullEmail = `${user}@${domain}`;
+    
+    // Encode display with HTML entities for additional bot protection
+    const encodedDisplay = fullEmail
+      .split('')
+      .map(char => `&#${char.charCodeAt(0)};`)
+      .join('');
+    
+    setEmail({ 
+      mailto: `mailto:${fullEmail}`,
+      display: fullEmail,
+      // Fallback encoded version for security
+      encodedDisplay 
+    });
   }, []);
+  
   return email;
 };
 
