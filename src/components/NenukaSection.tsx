@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 import nenukaLogo from "@/assets/nenuka-horizontal.svg";
+import nenukaSymbol from "@/assets/nenuka-symbol-colors.svg";
 import { ArrowRight } from "lucide-react";
 
 const NenukaSection = () => {
