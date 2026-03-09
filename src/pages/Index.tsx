@@ -71,6 +71,7 @@ const Index = () => {
         <ProjectsSection />
         <div className="border-t border-border" />
         <DemoReelSection />
+        <NenukaSection />
         <FooterSection />
       </main>
     </HelmetProvider>
