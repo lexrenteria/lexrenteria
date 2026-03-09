@@ -1,63 +1,77 @@
 import { motion } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 import nenukaLogo from "@/assets/nenuka-horizontal.svg";
+import { ArrowRight } from "lucide-react";
 
 const NenukaSection = () => {
   const { lang, t } = useI18n();
 
   return (
-    <section className="relative py-24 sm:py-32 overflow-hidden">
-      {/* Subtle diagonal gradient background to create a visual "break" */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--primary)/0.04)] via-transparent to-[hsl(var(--primary)/0.06)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,hsl(var(--primary)/0.05),transparent_70%)]" />
+    <section className="relative py-20 sm:py-28 px-6">
+      <div className="max-w-5xl mx-auto">
+        {/* Carousel-ready container — single card for now */}
+        <div className="relative overflow-hidden rounded-2xl bg-[hsl(270_80%_58%)] shadow-[0_8px_40px_hsl(270_80%_50%/0.35)]">
+          {/* Decorative blobs */}
+          <div className="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-[hsl(290_90%_65%/0.4)] blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-16 -left-16 w-56 h-56 rounded-full bg-[hsl(250_90%_55%/0.3)] blur-3xl pointer-events-none" />
 
-      {/* Top & bottom borders with accent fade */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+          <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 md:gap-12 p-8 sm:p-12 md:p-14">
+            {/* Logo / Visual block */}
+            <motion.a
+              href="https://nenuka.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, scale: 0.85 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="shrink-0 flex items-center justify-center w-44 h-44 sm:w-52 sm:h-52 rounded-2xl bg-white/15 backdrop-blur-sm border border-white/20 hover:bg-white/25 transition-colors duration-300"
+            >
+              <img
+                src={nenukaLogo}
+                alt="Nenuka Films"
+                className="h-10 sm:h-12 w-auto brightness-0 invert"
+              />
+            </motion.a>
 
-      <div className="relative z-10 max-w-4xl mx-auto px-6 flex flex-col items-center text-center gap-8">
-        {/* Logo */}
-        <motion.a
-          href="https://nenuka.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="group"
-        >
-          <img
-            src={nenukaLogo}
-            alt="Nenuka Films"
-            className="h-10 sm:h-12 w-auto opacity-80 group-hover:opacity-100 transition-opacity duration-500 invert-0"
-          />
-        </motion.a>
+            {/* Text + CTA */}
+            <div className="flex flex-col items-center md:items-start text-center md:text-left gap-5">
+              <motion.h3
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.7, delay: 0.1 }}
+                className="text-2xl sm:text-3xl font-heading font-bold text-white tracking-tight"
+              >
+                Nenuka Films
+              </motion.h3>
 
-        {/* Tagline */}
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className="text-lg sm:text-xl font-body text-muted-foreground leading-relaxed max-w-2xl"
-        >
-          {t.nenuka.description[lang]}
-        </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.7, delay: 0.2 }}
+                className="text-base sm:text-lg font-body text-white/85 leading-relaxed max-w-lg"
+              >
+                {t.nenuka.description[lang]}
+              </motion.p>
 
-        {/* CTA */}
-        <motion.a
-          href="https://nenuka.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="inline-block border border-primary/30 bg-primary/5 px-8 py-3 text-sm font-body tracking-widest uppercase text-primary/80 hover:text-primary hover:bg-primary/10 hover:border-primary/50 transition-all duration-300 rounded-sm"
-        >
-          {t.nenuka.cta[lang]}
-        </motion.a>
+              <motion.a
+                href="https://nenuka.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.7, delay: 0.35 }}
+                className="inline-flex items-center gap-2 bg-white text-[hsl(270_80%_40%)] font-body font-semibold text-sm tracking-wide px-7 py-3 rounded-full hover:bg-white/90 transition-colors duration-300 shadow-lg"
+              >
+                {t.nenuka.cta[lang]}
+                <ArrowRight className="w-4 h-4" />
+              </motion.a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
