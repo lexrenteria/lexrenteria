@@ -42,9 +42,11 @@ const NenukaSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.7, delay: 0.1 }}
-                className="text-2xl sm:text-3xl font-heading font-bold text-white tracking-tight"
+                className="text-2xl sm:text-3xl text-white tracking-tight lowercase"
+                style={{ fontFamily: "'Poppins', sans-serif" }}
               >
-                Nenuka Films
+                <span className="font-bold">nenuka</span>{" "}
+                <span className="font-light">films</span>
               </motion.h3>
 
               <motion.p
