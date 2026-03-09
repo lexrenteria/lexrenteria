@@ -41,6 +41,13 @@ const dictionary = {
     identity: { es: "identidad", en: "identity" },
     memory: { es: "memoria", en: "memory" },
   },
+  nenuka: {
+    description: {
+      es: "Cine independiente que cuenta la diversidad de nuestras historias. Nenuka Films es un colectivo cinematográfico queer dedicado a crear narrativas auténticas desde Guadalajara.",
+      en: "Independent cinema telling the diversity of our stories. Nenuka Films is a queer film collective dedicated to creating authentic narratives from Guadalajara.",
+    },
+    cta: { es: "Conocer Nenuka Films", en: "Discover Nenuka Films" },
+  },
   footer: {
     rights: {
       es: "Todos los derechos reservados.",

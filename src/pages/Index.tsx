@@ -6,6 +6,7 @@ import HeroSection from "@/components/HeroSection";
 import DemoReelSection from "@/components/DemoReelSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import AboutSection from "@/components/AboutSection";
+import NenukaSection from "@/components/NenukaSection";
 import FooterSection from "@/components/FooterSection";
 
 const Index = () => {
