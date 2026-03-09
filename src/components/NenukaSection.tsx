@@ -26,7 +26,7 @@ const NenukaSection = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="shrink-0 flex items-center justify-center w-44 h-44 sm:w-52 sm:h-52 rounded-2xl bg-white/15 backdrop-blur-sm border border-white/20 hover:bg-white/25 transition-colors duration-300 p-6"
+              className="shrink-0 flex items-center justify-center w-44 h-44 sm:w-52 sm:h-52 rounded-2xl bg-black/30 backdrop-blur-sm border border-white/10 hover:bg-black/40 transition-colors duration-300 p-6"
             >
               <img
                 src={nenukaSymbol}
