@@ -29,8 +29,8 @@ const dictionary = {
   about: {
     title: { es: "Sobre mí", en: "About" },
     bio1: {
-      es: "Soy Lex Rentería, cineasta queer originario de Guadalajara y fundador de la productora Kauyi. Mi trabajo se centra en contar historias de la comunidad LGBTQ+, abordando la memoria y la resistencia a través de una representación auténtica.",
-      en: "I'm Lex Rentería, a queer filmmaker from Guadalajara and founder of the production company Kauyi. My work focuses on telling stories from the LGBTQ+ community, addressing memory and resistance through authentic representation.",
+      es: "Soy Lex Rentería, cineasta queer de Guadalajara y fundador de la productora Kauyi. Mi trabajo se enfoca en la representación auténtica de la comunidad LGBTQ+, combinando una ejecución técnica sólida con narrativas sobre la memoria y la identidad.",
+      en: "I'm Lex Rentería, a queer filmmaker from Guadalajara and founder of the production company Kauyi. My work focuses on authentic representation of the LGBTQ+ community, combining solid technical execution with narratives about memory and identity.",
     },
     bio2: {
       es: "En mis películas, busco un cine que se sienta físicamente en la piel, logrando un equilibrio muy bello entre la atmósfera del relato y los detalles técnicos. Apoyándome en un ritmo inmersivo, un cuidadoso diseño de producción y el uso estratégico de locaciones, construyo narrativas que desafían la linealidad. Mi filmografía incluye el cortometraje {agaves}, mi debut como director con {purpura} en el FICG 2024, y mi rol como productor en Tailored for You (2026). Actualmente desarrollo mi primer largometraje, {videoclub}.",
