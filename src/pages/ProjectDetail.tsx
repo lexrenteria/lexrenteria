@@ -113,7 +113,7 @@ const ProjectDetail = () => {
       >
         {/* ── ZONE A: Hero + Title + CTA ── */}
         <div className="relative w-full aspect-video max-h-[60vh] overflow-hidden">
-          <img
+          <FadeImage
             src={project.still}
             alt={`${project.title} still`}
             className="w-full h-full object-cover"
