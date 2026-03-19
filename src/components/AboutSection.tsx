@@ -49,7 +49,7 @@ const AboutSection = () => {
           className="relative"
         >
           <div className="aspect-[3/4] overflow-hidden rounded-sm border border-border">
-            <img
+            <FadeImage
               src={portrait}
               alt="Lex Rentería portrait"
               className="w-full h-full object-cover"

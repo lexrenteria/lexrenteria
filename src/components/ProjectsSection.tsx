@@ -42,7 +42,7 @@ const ProjectsSection = () => {
             >
               <Link to={`/projects/${project.slug}`} className="block">
                 <div className="aspect-video overflow-hidden">
-                  <img
+                  <FadeImage
                     src={project.still}
                     alt={`${project.title} still`}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"

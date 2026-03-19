@@ -134,4 +134,18 @@ const Networking = () => {
   );
 };
 
+const NetworkingBg = ({ src }: { src: string }) => {
+  const ready = usePreloadImage(src);
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: ready ? 1 : 0 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 2, ease: "easeInOut" }}
+      className="absolute inset-x-0 top-0 h-1/3 bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: `url(${src})` }}
+    />
+  );
+};
+
 export default Networking;

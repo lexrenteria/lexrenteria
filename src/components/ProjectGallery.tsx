@@ -51,7 +51,7 @@ const ProjectGallery = ({ images, title }: ProjectGalleryProps) => {
             onClick={() => openLightbox(i)}
           >
             <div className="overflow-hidden rounded-sm border border-border">
-              <img
+              <FadeImage
                 src={src}
                 alt={`${title} - ${i + 1}`}
                 className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"

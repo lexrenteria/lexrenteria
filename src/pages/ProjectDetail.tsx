@@ -333,7 +333,7 @@ const ProjectDetail = () => {
                     className="group block border border-border rounded-sm overflow-hidden bg-card-gradient transition-all duration-500 accent-border-hover"
                   >
                     <div className="aspect-video overflow-hidden">
-                      <img
+                      <FadeImage
                         src={rp.still}
                         alt={`${rp.title} still`}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"

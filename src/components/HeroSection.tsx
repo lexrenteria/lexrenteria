@@ -207,4 +207,19 @@ const HeroSection = () => {
   );
 };
 
+/** Background still that preloads before fading in */
+const HeroBg = ({ src }: { src: string }) => {
+  const ready = usePreloadImage(src);
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: ready ? 0.7 : 0 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 2, ease: "easeInOut" }}
+      className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: `url(${src})` }}
+    />
+  );
+};
+
 export default HeroSection;
