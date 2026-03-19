@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 import { Link } from "react-router-dom";
 import portrait from "@/assets/portrait-lex.png";
+import FadeImage from "@/components/FadeImage";
 
 /** Replace {agaves}, {purpura}, {videoclub} tokens with <Link> elements */
 const renderBioWithLinks = (text: string) => {
