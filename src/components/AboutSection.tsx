@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 import { Link } from "react-router-dom";
 import portrait from "@/assets/portrait-lex.png";
+import FadeImage from "@/components/FadeImage";
 
 /** Replace {agaves}, {purpura}, {videoclub} tokens with <Link> elements */
 const renderBioWithLinks = (text: string) => {
@@ -48,7 +49,7 @@ const AboutSection = () => {
           className="relative"
         >
           <div className="aspect-[3/4] overflow-hidden rounded-sm border border-border">
-            <img
+            <FadeImage
               src={portrait}
               alt="Lex Rentería portrait"
               className="w-full h-full object-cover"

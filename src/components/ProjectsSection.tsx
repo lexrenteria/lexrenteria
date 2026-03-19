@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 import { projects } from "@/lib/projects";
 import { Link } from "react-router-dom";
+import FadeImage from "@/components/FadeImage";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 40 },
@@ -41,7 +42,7 @@ const ProjectsSection = () => {
             >
               <Link to={`/projects/${project.slug}`} className="block">
                 <div className="aspect-video overflow-hidden">
-                  <img
+                  <FadeImage
                     src={project.still}
                     alt={`${project.title} still`}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"

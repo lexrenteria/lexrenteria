@@ -3,6 +3,7 @@ import { useI18n } from "@/lib/i18n";
 import nenukaLogo from "@/assets/nenuka-horizontal.svg";
 import nenukaSymbol from "@/assets/nenuka-symbol-colors.svg";
 import { ArrowRight } from "lucide-react";
+import FadeImage from "@/components/FadeImage";
 
 const NenukaSection = () => {
   const { lang, t } = useI18n();
@@ -28,7 +29,7 @@ const NenukaSection = () => {
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="shrink-0 flex items-center justify-center w-44 h-44 sm:w-52 sm:h-52 rounded-2xl bg-black/30 backdrop-blur-sm border border-white/10 hover:bg-black/40 transition-colors duration-300 p-6"
             >
-              <img
+              <FadeImage
                 src={nenukaSymbol}
                 alt="Nenuka Films"
                 className="w-full h-full object-contain drop-shadow-lg"

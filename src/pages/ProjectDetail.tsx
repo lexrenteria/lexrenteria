@@ -9,6 +9,7 @@ import { useI18n } from "@/lib/i18n";
 import { projects } from "@/lib/projects";
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
+import FadeImage from "@/components/FadeImage";
 
 const tmdbPosters: Record<string, string> = {
   "purpura-neon": "https://image.tmdb.org/t/p/original/vEtrfW8FC6L0VZmDUMfPtcaBJhq.jpg",
@@ -112,7 +113,7 @@ const ProjectDetail = () => {
       >
         {/* ── ZONE A: Hero + Title + CTA ── */}
         <div className="relative w-full aspect-video max-h-[60vh] overflow-hidden">
-          <img
+          <FadeImage
             src={project.still}
             alt={`${project.title} still`}
             className="w-full h-full object-cover"
@@ -187,7 +188,7 @@ const ProjectDetail = () => {
             {/* Right: Official Poster + Tech Specs */}
             <div className="lg:col-span-2 space-y-8">
               <div className="border border-border rounded-sm overflow-hidden">
-                <img
+                <FadeImage
                   src={project.poster}
                   alt={`${project.title} poster`}
                   className="w-full h-auto object-cover"
@@ -332,7 +333,7 @@ const ProjectDetail = () => {
                     className="group block border border-border rounded-sm overflow-hidden bg-card-gradient transition-all duration-500 accent-border-hover"
                   >
                     <div className="aspect-video overflow-hidden">
-                      <img
+                      <FadeImage
                         src={rp.still}
                         alt={`${rp.title} still`}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
