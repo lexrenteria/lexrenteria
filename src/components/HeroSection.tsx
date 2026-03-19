@@ -4,6 +4,8 @@ import { useI18n } from "@/lib/i18n";
 import { projects } from "@/lib/projects";
 import portrait from "@/assets/portrait-lex.png";
 import { Link } from "react-router-dom";
+import FadeImage from "@/components/FadeImage";
+import { usePreloadImage } from "@/hooks/use-preload-image";
 
 /* Gather every candidate image from projects (stills + gallery) */
 const allProjectImages: string[] = [];
