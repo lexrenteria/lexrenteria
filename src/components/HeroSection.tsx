@@ -139,7 +139,7 @@ const HeroSection = () => {
           className="md:col-span-2 flex justify-center"
         >
           <div className="w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 rounded-full overflow-hidden border-2 border-primary/30 shadow-[0_0_40px_hsl(var(--primary)/0.15)]">
-            <img
+            <FadeImage
               src={portrait}
               alt="Lex Rentería"
               className="w-full h-full object-cover"
