@@ -9,6 +9,7 @@ import { useI18n } from "@/lib/i18n";
 import { projects } from "@/lib/projects";
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
+import FadeImage from "@/components/FadeImage";
 
 const tmdbPosters: Record<string, string> = {
   "purpura-neon": "https://image.tmdb.org/t/p/original/vEtrfW8FC6L0VZmDUMfPtcaBJhq.jpg",
