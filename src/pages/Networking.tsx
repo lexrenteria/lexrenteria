@@ -100,15 +100,7 @@ const Networking = () => {
     <div className="relative min-h-screen flex flex-col items-center justify-center px-6 py-16 overflow-hidden">
       {/* Rotating background stills — top third only */}
       <AnimatePresence mode="popLayout">
-        <motion.div
-          key={idx}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 2, ease: "easeInOut" }}
-          className="absolute inset-x-0 top-0 h-1/3 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${images[idx]})` }}
-        />
+        <NetworkingBg key={idx} src={images[idx]} />
       </AnimatePresence>
 
       {/* Overlays — top third */}
