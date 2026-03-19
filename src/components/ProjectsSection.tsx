@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 import { projects } from "@/lib/projects";
 import { Link } from "react-router-dom";
+import FadeImage from "@/components/FadeImage";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 40 },
