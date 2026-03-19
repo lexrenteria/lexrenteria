@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "@/lib/projects";
+import { usePreloadImage } from "@/hooks/use-preload-image";
 
 /* Gather every candidate image from projects (stills + gallery) */
 const allProjectImages: string[] = [];
