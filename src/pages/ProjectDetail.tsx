@@ -188,7 +188,7 @@ const ProjectDetail = () => {
             {/* Right: Official Poster + Tech Specs */}
             <div className="lg:col-span-2 space-y-8">
               <div className="border border-border rounded-sm overflow-hidden">
-                <img
+                <FadeImage
                   src={project.poster}
                   alt={`${project.title} poster`}
                   className="w-full h-auto object-cover"
