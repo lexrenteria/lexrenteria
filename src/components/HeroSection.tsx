@@ -120,15 +120,7 @@ const HeroSection = () => {
     >
       {/* Rotating background stills */}
       <AnimatePresence mode="popLayout">
-        <motion.div
-          key={idx}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.7 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 2, ease: "easeInOut" }}
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${images[idx]})` }}
-        />
+        <HeroBg key={idx} src={images[idx]} />
       </AnimatePresence>
 
       {/* Dark overlay */}
